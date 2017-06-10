@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/rd_group"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y97"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/tab_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rd_menu_home"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_btn_home_selector"
+            android:text="@string/rd_menu_home_title"/>
+
+        <RadioButton
+            android:id="@+id/rd_menu_video"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_btn_video_selector"
+            android:text="@string/rd_menu_video_title"/>
+
+        <RadioButton
+            android:id="@+id/rd_menu_audio"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_btn_audio_selector"
+            android:text="@string/rd_menu_audio_title"/>
+
+        <RadioButton
+            android:id="@+id/rd_menu_book"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_btn_book_selector"
+            android:text="@string/rd_menu_book_title"/>
+
+        <RadioButton
+            android:id="@+id/rd_menu_user"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_btn_user_selector"
+            android:text="@string/rd_menu_user_title"/>
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:layout_above="@id/rd_group"
+        android:background="@mipmap/tab_bg_sadow">
+    </RelativeLayout>
+
+</LinearLayout>

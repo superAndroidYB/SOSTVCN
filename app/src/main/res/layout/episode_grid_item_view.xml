@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/x335"
+              android:layout_height="@dimen/y100"
+              android:background="@drawable/episode_shape"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/day_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginTop="@dimen/x10"
+        android:singleLine="true"
+        android:text="03-01"
+        android:textColor="@drawable/episode_date_text_color_selector"
+        android:textSize="@dimen/x26"/>
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x5"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginTop="@dimen/x5"
+        android:singleLine="true"
+        android:text="基甸的故事"
+        android:textColor="@drawable/episode_text_color_selector"
+        android:textSize="@dimen/x26"/>
+
+</LinearLayout>

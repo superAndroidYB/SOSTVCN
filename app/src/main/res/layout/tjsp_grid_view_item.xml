@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/tjsp_item_imageview"
+            android:layout_width="@dimen/x418"
+            android:layout_height="@dimen/y234"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/video_cover"/>
+
+        <TextView
+            android:id="@+id/tjsp_item_datetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tjsp_item_imageview"
+            android:layout_alignRight="@id/tjsp_item_imageview"
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_marginRight="@dimen/y10"
+            android:background="@drawable/tjsp_shape"
+            android:text="2017-02-02"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x26"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tjsp_item_imageview"
+            android:paddingBottom="@dimen/y12"
+            android:paddingTop="@dimen/y12"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tjsp_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="2017-02-02"
+                android:textColor="@color/tjsp_item_tile_color"
+                android:textSize="@dimen/x26"/>
+
+            <TextView
+                android:id="@+id/tjsp_item_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/x10"
+                android:text="2017-02-02"
+                android:textColor="@color/tjsp_item_subtile_color"
+                android:textSize="@dimen/x22"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

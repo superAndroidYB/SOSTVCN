@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="activity_main_tab_text">#949494</color>
+    <color name="activity_main_tab_text_sel">#1EB2D2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="default_seach_color">#BFBFBF</color>
+
+
+    <color name="fragment_home_tj">#333333</color>
+    <color name="fragment_home_hyh_color">#949494</color>
+    <color name="fragment_home_hyh_h_color">#1E82D2</color>
+
+    <color name="tjsp_item_tile_color">#2B2B2B</color>
+    <color name="tjsp_item_subtile_color">#5D5D5D</color>
+
+    <color name="biz_audio_progress_bg">#00b2ff</color>
+    <color name="biz_audio_progress_first">#ffffff</color>
+    <color name="biz_audio_progress_second">#6b6666</color>
+
+    <color name="spiner_text_default">#282828</color>
+
+    <color name="whitesmoke">#F5F5F5</color>
+</resources>

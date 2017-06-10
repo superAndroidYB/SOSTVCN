@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.sostvcn.widget.RoundImageView
+            android:id="@+id/tjyp_item_imageview"
+            android:layout_width="@dimen/x76"
+            android:layout_height="@dimen/y76"
+            android:src="@mipmap/home_voice_cover"
+            app:type="circle"/>
+
+
+        <TextView
+            android:id="@+id/tyjp_textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tjyp_item_imageview"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_toRightOf="@id/tjyp_item_imageview"
+            android:singleLine="true"
+            android:text="上帝对罪人的爱"
+            android:textColor="#3E3E3E"
+            android:textSize="@dimen/x24"/>
+
+        <TextView
+            android:id="@+id/tyjp_textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y5"
+            android:layout_toRightOf="@id/tyjp_textview1"
+            android:singleLine="true"
+            android:text="/《喜乐的泉源》第一章"
+            android:textColor="#646464"
+            android:textSize="@dimen/x24"/>
+
+        <TextView
+            android:id="@+id/tyjp_textview3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tjyp_item_imageview"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_toRightOf="@id/tjyp_item_imageview"
+            android:singleLine="true"
+            android:text="上帝爱世人"
+            android:textColor="#8D8D8D"
+            android:textSize="@dimen/x20"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

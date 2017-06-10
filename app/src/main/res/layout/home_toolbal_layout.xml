@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y88"
+    android:background="@color/white"
+    android:minHeight="?attr/actionBarSize">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/y15"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginTop="@dimen/y15">
+
+        <View
+            android:id="@+id/toolbar_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y58"
+            android:background="@mipmap/nav_search_border"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true" android:layout_marginLeft="89dp"
+            android:layout_marginStart="89dp" android:singleLine="true"
+            android:text="@string/default_seach_text"
+            android:textColor="@color/default_seach_color" android:textSize="@dimen/x28"/>
+
+        <ImageButton
+            android:id="@+id/toolbar_search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y58"
+            android:layout_alignRight="@id/toolbar_search"
+            android:layout_marginTop="@dimen/y1"
+            android:background="@mipmap/nav_search_bg"/>
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/toolbar_search_button"
+            android:layout_alignStart="@+id/toolbar_search_button"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp" android:background="@mipmap/nav_btn_search"/>
+
+
+    </RelativeLayout>
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="发现"
+        android:textColor="#282828"
+        android:textSize="@dimen/x40"/>
+    -->
+
+</android.support.v7.widget.Toolbar>

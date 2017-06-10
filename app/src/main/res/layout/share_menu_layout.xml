@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="分享到"
+        android:textColor="#323232"
+        android:textSize="@dimen/x24"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/y40"
+        android:layout_marginLeft="@dimen/x80"
+        android:layout_marginRight="@dimen/x80"
+        android:layout_marginTop="@dimen/y40"
+        android:stretchColumns="0,1,2,3">
+
+        <TableRow>
+            <LinearLayout
+                android:id="@+id/share_qq_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center_horizontal"
+                           android:background="@mipmap/share_qq"
+                           android:hapticFeedbackEnabled="false"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:text="@string/share_qq_str"
+                          android:textColor="#666666"
+                          android:textSize="@dimen/x22"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/share_qq_zone_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center_horizontal"
+                           android:background="@mipmap/share_qq_zone"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:text="@string/share_qq_zone_str"
+                          android:textColor="#666666"
+                          android:textSize="@dimen/x22"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/share_weixin_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center_horizontal"
+                           android:background="@mipmap/share_weixin"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:text="@string/share_weixin_str"
+                          android:textColor="#666666"
+                          android:textSize="@dimen/x22"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/share_weixin_quan_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center_horizontal"
+                           android:background="@mipmap/share_weixin_quan"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:text="@string/share_weixin_quan_str"
+                          android:textColor="#666666"
+                          android:textSize="@dimen/x22"/>
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow >
+            <LinearLayout
+                android:id="@+id/share_weibo_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="vertical">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center_horizontal"
+                           android:background="@mipmap/share_weibo"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:text="@string/share_weibo_str"
+                          android:textColor="#666666"
+                          android:textSize="@dimen/x22"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/share_alipay_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="vertical">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center_horizontal"
+                           android:background="@mipmap/share_alipay"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:text="@string/share_alipay_str"
+                          android:textColor="#666666"
+                          android:textSize="@dimen/x22"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/share_copy_link_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="vertical">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center_horizontal"
+                           android:background="@mipmap/share_copy_link"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_horizontal"
+                          android:text="@string/share_copy_link_str"
+                          android:textColor="#666666"
+                          android:textSize="@dimen/x22"/>
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+
+</RelativeLayout>

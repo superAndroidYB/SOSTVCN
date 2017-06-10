@@ -1,0 +1,219 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_seach_color"
+    tools:context="com.sostvcn.fragment.HomeFragment">
+
+    <include android:id="@+id/home_toolbar" layout="@layout/home_toolbal_layout"/>
+
+    <com.sostvcn.widget.ReboundScrollView
+        android:id="@+id/rebound_scroll_View"
+        android:layout_below="@id/home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                <com.sostvcn.widget.HomeSlideGallery
+                    android:id="@+id/home_slide_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y350"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y50"
+                    android:layout_alignBottom="@id/home_slide_view"
+                    android:background="#33000000"
+                    android:orientation="horizontal">
+
+                    <TextView android:id="@+id/imagettitle"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentLeft="true"
+                              android:layout_centerInParent="true"
+                              android:layout_marginLeft="@dimen/x30"
+                              android:ellipsize="end"
+                              android:singleLine="true"
+                              android:textColor="@color/white"
+                              android:textSize="@dimen/x28"/>
+
+                    <TextView android:id="@+id/imagesubttitle"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_alignParentRight="true"
+                              android:layout_centerInParent="true"
+                              android:layout_marginRight="@dimen/x30"
+                              android:singleLine="true"
+                              android:textColor="@color/white"
+                              android:textSize="@dimen/x28"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@color/white"
+                android:padding="@dimen/x20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/fragment_home_tjsp"
+                    android:textColor="@color/fragment_home_tj"
+                    android:textSize="@dimen/x32"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_tjsphyh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/x5">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/x3"
+                        android:background="@drawable/tab_btn_switch_selector"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_home_hyh"
+                        android:textColor="@drawable/tab_text_switch_selector"
+                        android:textSize="@dimen/x28"/>
+                </LinearLayout>
+
+
+                <com.sostvcn.widget.SostvGridView
+                    android:id="@+id/gridview_tjsp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/btn_tjsphyh"
+                    android:layout_marginTop="@dimen/y10"
+                    android:horizontalSpacing="@dimen/x10"
+                    android:numColumns="2">
+
+                </com.sostvcn.widget.SostvGridView>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@color/white"
+                android:padding="@dimen/x20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/fragment_home_tjyd"
+                    android:textColor="@color/fragment_home_tj"
+                    android:textSize="@dimen/x34"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_tjydhyh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/x5">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/x3"
+                        android:background="@drawable/tab_btn_switch_selector"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_home_hyh"
+                        android:textColor="@drawable/tab_text_switch_selector"
+                        android:textSize="@dimen/x30"/>
+                </LinearLayout>
+
+                <com.sostvcn.widget.SostvGridView
+                    android:id="@+id/gridview_tjyd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/btn_tjydhyh"
+                    android:layout_marginTop="@dimen/y10"
+                    android:horizontalSpacing="@dimen/x10"
+                    android:numColumns="3">
+
+                </com.sostvcn.widget.SostvGridView>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@color/white"
+                android:padding="@dimen/x20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/fragment_home_tjyp"
+                    android:textColor="@color/fragment_home_tj"
+                    android:textSize="@dimen/x34"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_tjyphyh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/x5">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/x3"
+                        android:background="@drawable/tab_btn_switch_selector"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_home_hyh"
+                        android:textColor="@drawable/tab_text_switch_selector"
+                        android:textSize="@dimen/x30"/>
+                </LinearLayout>
+
+                <com.sostvcn.widget.SostvListView
+                    android:id="@+id/listview_tjyp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/btn_tjyphyh"
+                    android:layout_marginTop="@dimen/y10"
+                    android:divider="@null"
+                    android:dividerHeight="@dimen/y26">
+
+                </com.sostvcn.widget.SostvListView>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </com.sostvcn.widget.ReboundScrollView>
+</RelativeLayout>

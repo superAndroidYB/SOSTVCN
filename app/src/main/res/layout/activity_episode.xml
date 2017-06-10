@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sostvcn.ui.EpisodeActivity">
+
+    <include layout="@layout/episode_toolboor_layout"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y10"
+        android:background="@color/default_seach_color"/>
+
+    <com.sostvcn.widget.SosSpinerView
+        android:id="@+id/spinerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSize="@dimen/x20"
+        app:textColor="#282828"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible">
+
+    </com.sostvcn.widget.SosSpinerView>
+
+    <GridView
+        android:id="@+id/video_by_yearview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:horizontalSpacing="@dimen/x20"
+        android:listSelector="@color/transparent"
+        android:numColumns="2"
+        android:paddingTop="@dimen/y30"
+        android:paddingBottom="@dimen/y30"
+        android:verticalSpacing="@dimen/y20"></GridView>
+
+
+</LinearLayout>

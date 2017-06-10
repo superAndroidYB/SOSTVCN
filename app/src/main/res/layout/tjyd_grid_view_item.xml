@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/tjyd_item_imageview"
+        android:layout_width="@dimen/x230"
+        android:layout_height="@dimen/y344"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/home_book_cover"/>
+
+    <TextView
+        android:id="@+id/tjyd_item_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/y12"
+        android:paddingTop="@dimen/y12"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="地球生物的年龄"
+        android:textColor="#474747"
+        android:textSize="@dimen/x26"/>
+</LinearLayout>

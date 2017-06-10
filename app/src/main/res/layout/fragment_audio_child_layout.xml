@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/audio_layout_v1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y10"
+            android:background="@color/default_seach_color"/>
+
+        <GridView
+            android:id="@+id/frag_audio_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
+            android:paddingTop="@dimen/y30"
+            android:horizontalSpacing="@dimen/x10"
+            android:verticalSpacing="@dimen/x20"
+            android:numColumns="3"></GridView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/audio_layout_v2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/title_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y310"
+            android:src="@mipmap/video_cover"
+            android:scaleType="centerCrop"/>
+
+        <GridView
+            android:id="@+id/frag_audio_grid_view_v2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
+            android:paddingTop="@dimen/y30"
+            android:horizontalSpacing="@dimen/x10"
+            android:verticalSpacing="@dimen/x20"
+            android:numColumns="2"></GridView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

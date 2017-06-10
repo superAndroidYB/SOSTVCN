@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">sostvcn</string>
+    <string name="rd_menu_home_title">首页</string>
+    <string name="rd_menu_video_title">视频</string>
+    <string name="rd_menu_audio_title">音乐</string>
+    <string name="rd_menu_book_title">阅读</string>
+    <string name="rd_menu_user_title">用户</string>
+
+    <string name="default_seach_text">形成品格的粒子</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="fragment_home_tjsp">推荐视频</string>
+    <string name="fragment_home_tjyd">推荐阅读</string>
+    <string name="fragment_home_tjyp">推荐音频</string>
+    <string name="fragment_home_hyh">换一换</string>
+
+    <string name="share_alipay_str">支付宝好友</string>
+    <string name="share_copy_link_str">复制链接</string>
+    <string name="share_qq_str">QQ</string>
+    <string name="share_qq_zone_str">QQ空间</string>
+    <string name="share_weibo_str">微博</string>
+    <string name="share_weixin_str">微信</string>
+    <string name="share_weixin_quan_str">微信朋友圈</string>
+
+    <string name="gq_str">高清</string>
+    <string name="bq_str">标清</string>
+
+    <string name="audio_title1">播放</string>
+    <string name="audio_title2">收藏</string>
+    <string name="audio_title2_2">取消收藏</string>
+    <string name="audio_title3">分享</string>
+    <string name="audio_title4">多选</string>
+
+</resources>

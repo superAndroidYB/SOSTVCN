@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sostvcn.widget.ReboundScrollView
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/backgroud_view"
+                android:background="@mipmap/default_dim"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y450">
+
+                <ImageView
+                    android:id="@+id/special_image"
+                    android:layout_width="@dimen/x260"
+                    android:layout_height="@dimen/x260"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginBottom="@dimen/y45"
+                    android:layout_alignParentBottom="true"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/x40"
+                    android:layout_toRightOf="@id/special_image"
+                    android:layout_toEndOf="@id/special_image">
+
+                    <TextView
+                        android:id="@+id/special_title"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x36"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/special_author"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/special_from"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x28"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/x20"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y120"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/audio_play_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/audio_album_playall"
+                    android:gravity="center"
+                    android:text="@string/audio_title1"
+                    android:textColor="@drawable/tab_text_switch_selector"/>
+
+                <TextView
+                    android:id="@+id/audio_collect_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/audio_album_collection"
+                    android:gravity="center"
+                    android:text="@string/audio_title2"
+                    android:textColor="@drawable/tab_text_switch_selector"/>
+
+                <TextView
+                    android:id="@+id/audio_share_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/audio_album_share"
+                    android:gravity="center"
+                    android:text="@string/audio_title3"
+                    android:textColor="@drawable/tab_text_switch_selector"/>
+
+                <TextView
+                    android:id="@+id/audio_multiselect_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/audio_album_multiselect"
+                    android:gravity="center"
+                    android:text="@string/audio_title4"
+                    android:textColor="@drawable/tab_text_switch_selector"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10"
+                android:background="@color/default_seach_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x70"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x30"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="列表"
+                    android:textColor="#282828"
+                    android:textSize="@dimen/x30"/>
+
+                <TextView
+                    android:id="@+id/count_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="/共12讲"
+                    android:textColor="#282828"
+                    android:textSize="@dimen/x25"/>
+            </LinearLayout>
+
+            <com.sostvcn.widget.SostvListView
+                android:id="@+id/audio_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:scrollbars="none">
+            </com.sostvcn.widget.SostvListView>
+
+        </LinearLayout>
+    </com.sostvcn.widget.ReboundScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x88"
+        android:background="@color/transparent" android:id="@+id/toolbar_view">
+
+        <ImageView
+            android:id="@+id/toolbar_back"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true" android:layout_marginLeft="@dimen/x30"
+            android:src="@mipmap/video_series_back" android:padding="@dimen/x10"/>
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="10dp" android:text="专辑"
+            android:textColor="#FFFEFE"
+            android:textSize="@dimen/x40"/>
+
+        <ImageView
+            android:id="@+id/toolbar_player"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true" android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x30" android:background="@mipmap/audio_paly"
+            android:padding="@dimen/x10"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

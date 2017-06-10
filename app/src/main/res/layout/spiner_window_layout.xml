@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y80"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/year_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="2017年"
+        android:textColor="#282828" android:textSize="@dimen/x30"/>
+
+    <ImageView
+        android:id="@+id/spiner_spread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10" android:src="@mipmap/video_intro_arrow_down"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/year_text_view"/>
+</RelativeLayout>
