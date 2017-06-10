@@ -1,6 +1,7 @@
 package com.sostvcn.helper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.sostvcn.R;
 import com.sostvcn.adapter.SostvCacheListAdapter;
 import com.sostvcn.api.VideoPageApi;
@@ -16,11 +19,14 @@ import com.sostvcn.gateway.callback.ProgressSubscriber;
 import com.sostvcn.gateway.callback.SubscriberOnNextListener;
 import com.sostvcn.model.BaseListResponse;
 import com.sostvcn.model.SosCateVideo;
+import com.sostvcn.model.SosDownloadBean;
 import com.sostvcn.utils.DateUtils;
+import com.sostvcn.utils.SDCardUtils;
 import com.sostvcn.widget.SosSpinerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +44,25 @@ public class DownLoadHelper {
     private static SosSpinerView qxdSelector;
     private static SosSpinerView yearSelector;
     private static Map<String, List<SosCateVideo.Video>> map;
+
+    private Context context;
+    private DbUtils dbUtils;
+
+    public DownLoadHelper(Context context){
+        this.context = context;
+        this.dbUtils = DbUtils.create(context, SDCardUtils.getSDCardRootDir() + "/SOSTVDB", "SOSTVDB");
+    }
+
+    public void saveUpdateDownLoadBean(SosDownloadBean bean) throws DbException {
+        bean.setUpdateTime(new Date());
+        dbUtils.saveOrUpdate(bean);
+    }
+
+    public void deleteDownLoadBean(SosDownloadBean bean) throws DbException {
+        dbUtils.delete(bean);
+    }
+
+
     /**
      * 弹出下载框
      */

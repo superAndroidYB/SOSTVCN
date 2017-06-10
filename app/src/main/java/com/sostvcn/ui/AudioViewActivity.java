@@ -28,6 +28,8 @@ import com.sostvcn.R;
 import com.sostvcn.helper.CollectHelper;
 import com.sostvcn.model.SosAudioList;
 import com.sostvcn.model.SosCollectEntity;
+import com.sostvcn.model.SosDownloadBean;
+import com.sostvcn.service.DownloadService;
 import com.sostvcn.service.MusicService;
 import com.sostvcn.utils.Constants;
 import com.sostvcn.utils.SPUtils;
@@ -82,7 +84,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
     private ImageView player_list_btn;
 
     private int[] playWay = new int[]{R.drawable.audio_play_list_selector,
-            R.drawable.audio_play_single_selector,R.drawable.audio_playlist_randow_selector};
+            R.drawable.audio_play_single_selector, R.drawable.audio_playlist_randow_selector};
     private int playWayIndex;
 
     private SosAudioList medias;
@@ -112,7 +114,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         bitmapUtils.configDefaultLoadFailedImage(R.mipmap.home_book_cover);//加载失败图片
         bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);
 
-        playWayIndex = (int)SPUtils.get(this,"playWayIndex",0);
+        playWayIndex = (int) SPUtils.get(this, "playWayIndex", 0);
 
         initMusicView();
 
@@ -154,6 +156,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
 
         sb_audio_view.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             private int progress = 0;
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 progress = i;
@@ -171,14 +174,14 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-    private void initMusicView(){
+    private void initMusicView() {
         title_text_view.setText(medias.getVoice_list().get(postion).getTitle());
         subtitle_text_view.setText("-" + medias.getAlbum_title() + "-");
         bitmapUtils.display(specima_image_view, medias.getAlbum_cover());
         player_way_btn.setImageResource(playWay[playWayIndex]);
     }
 
-    private void seekBarChange(int progress){
+    private void seekBarChange(int progress) {
         Intent intent = new Intent();
         intent.putExtra("index", progress);
         intent.setAction(Constants.ACTION_PLAN_CURRENT);
@@ -224,17 +227,20 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
                 intiSharePopWindow();
                 break;
             case R.id.audio_download_btn:
+                SosAudioList.Voice_list audio = medias.getVoice_list().get(postion);
+                SosDownloadBean bean = new SosDownloadBean(audio.getTitle(), medias.getAlbum_title(), audio.getDownload(), Constants.TYPE_AUDIO);
+                DownloadService.startService(this, bean);
                 break;
             case R.id.audio_delete_btn:
                 break;
             case R.id.player_way_btn:
-                if(playWayIndex == playWay.length - 1){
+                if (playWayIndex == playWay.length - 1) {
                     playWayIndex = 0;
-                }else{
-                    playWayIndex ++ ;
+                } else {
+                    playWayIndex++;
                 }
                 player_way_btn.setImageResource(playWay[playWayIndex]);
-                SPUtils.put(this,"playWayIndex",playWayIndex);
+                SPUtils.put(this, "playWayIndex", playWayIndex);
                 break;
             case R.id.player_previous_btn:
                 if (postion == 0) {
@@ -247,7 +253,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
                 sendBroadcast(intent);
                 break;
             case R.id.player_pause_btn:
-                if ((int)player_pause_btn.getTag() == R.mipmap.audio_suspend) {
+                if ((int) player_pause_btn.getTag() == R.mipmap.audio_suspend) {
                     intent.putExtra("index", postion);
                     intent.setAction(Constants.ACTION_PLAY);
                     sendBroadcast(intent);
@@ -413,7 +419,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         public void onReceive(Context context, Intent intent) {
             if (Constants.ACTION_PlAYING_STATE.equals(intent.getAction())) {
 
-                postion = intent.getIntExtra("media",0);
+                postion = intent.getIntExtra("media", 0);
 
                 initMusicView();
 

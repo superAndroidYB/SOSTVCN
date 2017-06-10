@@ -20,4 +20,14 @@ public class Constants {
     public static final String ACTION_LIST = "ACTION_LIST";
     public static final String ACTION_PLAN_CURRENT = "ACTION_PLAN_CURRENT";
     public static final String ACTION_SERVICR_PUASE = "ACTION_SERVICR_PUASE";
+
+
+    public static final int WAITTING = 0;
+    public static final int DOWNLOADING = 1;
+    public static final int PAUSED = 2;
+    public static final int FAILED = 3;
+    public static final int DOWNLOADED = 4;
+    public static final String DL_NEW_TASK = "DL_NEW_TASK";
+    public static final String DL_UPDATE_LIST = "DL_UPDATE_LIST";
+    public static final String DL_UPDATE_ITEM = "DL_UPDATE_ITEM";
 }

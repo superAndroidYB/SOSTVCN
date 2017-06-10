@@ -67,6 +67,9 @@
         <service android:name=".service.MusicService">
         </service>
 
+        <service android:name=".service.DownloadService">
+        </service>
+
         <receiver android:name=".receiver.TrackNextReceiver"/>
         <receiver android:name=".receiver.TrackPlayReceiver"/>
 
