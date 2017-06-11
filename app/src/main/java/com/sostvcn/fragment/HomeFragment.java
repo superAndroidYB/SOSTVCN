@@ -49,7 +49,7 @@ public class HomeFragment extends BaseFragment implements ReboundScrollView.Rebo
 
     @ViewInject(R.id.home_slide_view)
     private HomeSlideGallery gallery;
-    private int galleryHeight;
+    private int galleryHeight = 0;
     private List<SosSlideImage> list;
 
     @ViewInject(R.id.imagettitle)
@@ -279,11 +279,25 @@ public class HomeFragment extends BaseFragment implements ReboundScrollView.Rebo
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("HomeFragment");
+        gallery.startTimer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        gallery.destroy();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("HomeFragment");
+        gallery.destroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        gallery.destroy();
     }
 }

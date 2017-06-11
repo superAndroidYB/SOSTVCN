@@ -34,28 +34,21 @@ public class HomeSlideGallery extends Gallery {
         };
     };
 
-    private final Timer timer = new Timer();
-    private final TimerTask task = new TimerTask() {
-        public void run() {
-            mHandler.sendEmptyMessage(timerAnimation);
-        }
-    };
+    private Timer timer = null;
+    private TimerTask task = null;
 
     public HomeSlideGallery(Context paramContext) {
         super(paramContext);
-        timer.schedule(task, 3000, 3000);
     }
 
     public HomeSlideGallery(Context paramContext, AttributeSet paramAttributeSet) {
         super(paramContext, paramAttributeSet);
-        timer.schedule(task, 3000, 3000);
 
     }
 
     public HomeSlideGallery(Context paramContext, AttributeSet paramAttributeSet,
                      int paramInt) {
         super(paramContext, paramAttributeSet, paramInt);
-        timer.schedule(task, 3000, 3000);
 
     }
 
@@ -81,6 +74,30 @@ public class HomeSlideGallery extends Gallery {
     }
 
     public void destroy() {
-        timer.cancel();
+        if(task != null){
+            task.cancel();
+            task = null;
+        }
+        if(timer != null){
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+    }
+
+    public void startTimer(){
+        if(timer == null){
+            timer = new Timer();
+        }
+        if(task == null){
+            task = new TimerTask() {
+                public void run() {
+                    mHandler.sendEmptyMessage(timerAnimation);
+                }
+            };
+        }
+        if(timer != null && task != null){
+            timer.schedule(task, 3000, 3000);
+        }
     }
 }
