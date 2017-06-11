@@ -37,7 +37,7 @@
         android:theme="@style/AppTheme">
 
         <meta-data android:name="UMENG_APPKEY" android:value="576e988c67e58e9040003afd"></meta-data>
-        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
+        <meta-data android:name="UMENG_CHANNEL" android:value="Wandoujia"/>
 
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
@@ -55,13 +55,17 @@
         <activity
             android:name=".ui.VideoViewActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".ui.EpisodeActivity">
         </activity>
         <activity android:name=".ui.SpecialActivity">
         </activity>
-        <activity android:name=".ui.AudioViewActivity">
+        <activity android:name=".ui.AudioViewActivity"
+                  android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait">
         </activity>
 
         <service android:name=".service.MusicService">

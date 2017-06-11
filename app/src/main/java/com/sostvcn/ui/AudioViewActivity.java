@@ -232,6 +232,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
                 DownloadService.startService(this, bean);
                 break;
             case R.id.audio_delete_btn:
+
                 break;
             case R.id.player_way_btn:
                 if (playWayIndex == playWay.length - 1) {
@@ -489,7 +490,12 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void finish() {
         super.finish();
-        //this.moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();
     }
 
     @Override

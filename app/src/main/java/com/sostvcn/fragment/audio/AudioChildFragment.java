@@ -81,6 +81,6 @@ public class AudioChildFragment extends BaseFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         SosAudioCatesInfo.SubCates subCates = catesInfo.getSubCates().get(i);
-        SpecialActivity.start(getActivity(),subCates.getCate_id(),subCates.getPlaylist_id());
+        SpecialActivity.start(getActivity(), subCates.getCate_id(), subCates.getPlaylist_id());
     }
 }

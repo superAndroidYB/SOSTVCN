@@ -12,6 +12,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
     private GestureDetector gestureDetector; //手势监听
     private TextView progSeekTime;
     private TextView progTotalTime;
+    private FrameLayout curtain;
 
     private VideoPlayCallbackImpl mVideoPlayCallback;
 
@@ -208,12 +210,21 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
         percentTextview = (TextView) findViewById(R.id.percent_textview);
         extraTextview = (TextView) findViewById(R.id.extra_textview);
         kjkvImageView = (ImageView) findViewById(R.id.kjkt_image_view);
+        curtain = (FrameLayout)findViewById(R.id.curtain);
         mMediaController.setMediaControl(mMediaControl);
         videoView.setBufferSize(512 * 1024);
         videoView.setOnInfoListener(this);
         videoView.setOnTouchListener(mOnTouchVideoListener);
         gestureDetector = new GestureDetector(mContext, new SosGestureListener());
         videoView.setOnBufferingUpdateListener(this);
+
+    }
+
+    public void showCurtain(){
+        curtain.setVisibility(VISIBLE);
+        mProgressBarView.setVisibility(GONE);
+        percentTextview.setVisibility(GONE);
+        extraTextview.setVisibility(GONE);
     }
 
     public void startPlay(String videoUrl) {
@@ -226,6 +237,7 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
         mProgressBarView.setVisibility(VISIBLE);
         percentTextview.setVisibility(View.VISIBLE);
         extraTextview.setVisibility(View.VISIBLE);
+        curtain.setVisibility(GONE);
 
         resetHideTimer();
         resetUpdateTimer();
@@ -319,7 +331,7 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
         mMediaController.setVisibility(View.VISIBLE);
     }
 
-    private void startPlayVideo() {
+    public void startPlayVideo() {
         videoView.start();
         resetHideTimer();
         resetUpdateTimer();
@@ -374,6 +386,10 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
                         mMediaController.setVisibility(View.VISIBLE);
                     }
                 });
+    }
+
+    public void stopPlayback(){
+        videoView.stopPlayback();
     }
 
     @Override

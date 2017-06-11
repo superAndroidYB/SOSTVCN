@@ -45,6 +45,8 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMVideo;
 
 import java.util.List;
 
@@ -86,8 +88,17 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
     @ViewInject(R.id.gxsm_text_view)
     private TextView gxsmTextView;
 
+    @ViewInject(R.id.curtain_btn)
+    private ImageView curtain_btn;
+
     @ViewInject(R.id.tjsp_listview)
     private SostvListView listView;
+    @ViewInject(R.id.info_span1)
+    private View info_span1;
+    @ViewInject(R.id.info_span2)
+    private View info_span2;
+
+
     private List<RecentlyVideo> recentlyVideoList;
     private RecentlyVideoListViewAdapter recentlyVideoListViewAdapter;
 
@@ -118,6 +129,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
         videoColltionBtn.setOnClickListener(this);
         videoShareBtn.setOnClickListener(this);
         showEpisodeBtn.setOnClickListener(this);
+        curtain_btn.setOnClickListener(this);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -132,10 +144,19 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
         id = getIntent().getIntExtra("id", 0);
         isCate = getIntent().getBooleanExtra("isCate", false);
         if (isCate) {
+            videoView.showCurtain();
+            info_span1.setVisibility(View.GONE);
+            info_span2.setVisibility(View.GONE);
             loadRecentlyVideo(id);
         } else {
             loadVideoInfo(id, true);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
     }
 
     @Override
@@ -153,11 +174,11 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.more_btn:
                 if (videoCatTitleTextView.getVisibility() == View.GONE) {
-                    mortTitleBtn.setBackgroundResource(R.mipmap.video_intro_arrow_up);
+                    mortTitleBtn.setImageResource(R.mipmap.video_intro_arrow_up);
                     videoCatTitleTextView.setVisibility(View.VISIBLE);
                     videoMoretextView.setVisibility(View.VISIBLE);
                 } else {
-                    mortTitleBtn.setBackgroundResource(R.mipmap.video_intro_arrow_down);
+                    mortTitleBtn.setImageResource(R.mipmap.video_intro_arrow_down);
                     videoCatTitleTextView.setVisibility(View.GONE);
                     videoMoretextView.setVisibility(View.GONE);
                 }
@@ -184,6 +205,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
                     bundle.putInt("id", recentlyVideoList.iterator().next().getCate_id());
                     intent.putExtras(bundle);
                     startActivityForResult(intent, 2);
+                    this.overridePendingTransition(R.anim.episode_activity_silde_in,R.anim.episode_activity_silde_out);
                 }
                 break;
             /**
@@ -209,38 +231,74 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
              */
             case R.id.share_qq_btn:
                 popupWindow.dismiss();
+                UMVideo umVideoQQ = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                umVideoQQ.setH5Url(cateVideo.getVideo().getShare_url());
+                umVideoQQ.setTitle(cateVideo.getVideo().getTitle());
+                umVideoQQ.setThumb(new UMImage(this,cateVideo.getVideo().getImage()));
                 new ShareAction(this).setPlatform(SHARE_MEDIA.QQ)
-                        .withText("测试分享")
+                        .withMedia(umVideoQQ)
                         .setCallback(umShareListener).share();
                 break;
             case R.id.share_qq_zone_btn:
                 popupWindow.dismiss();
+                UMVideo umVideoQZONE = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                umVideoQZONE.setH5Url(cateVideo.getVideo().getShare_url());
+                umVideoQZONE.setTitle(cateVideo.getVideo().getTitle());
+                umVideoQZONE.setThumb(new UMImage(this,cateVideo.getVideo().getImage()));
                 new ShareAction(this).setPlatform(SHARE_MEDIA.QZONE)
-                        .withText("测试分享")
+                        .withMedia(umVideoQZONE)
                         .setCallback(umShareListener).share();
                 break;
             case R.id.share_weixin_btn:
+                popupWindow.dismiss();
+                UMVideo umVideoWEIXIN = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                umVideoWEIXIN.setH5Url(cateVideo.getVideo().getShare_url());
+                umVideoWEIXIN.setTitle(cateVideo.getVideo().getTitle());
+                umVideoWEIXIN.setThumb(new UMImage(this,cateVideo.getVideo().getImage()));
+                new ShareAction(this).setPlatform(SHARE_MEDIA.WEIXIN)
+                        .withMedia(umVideoWEIXIN)
+                        .setCallback(umShareListener).share();
                 break;
             case R.id.share_weixin_quan_btn:
+                popupWindow.dismiss();
+                UMVideo umVideoWEIXIN_CIRCLE = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                umVideoWEIXIN_CIRCLE.setH5Url(cateVideo.getVideo().getShare_url());
+                umVideoWEIXIN_CIRCLE.setTitle(cateVideo.getVideo().getTitle());
+                umVideoWEIXIN_CIRCLE.setThumb(new UMImage(this,cateVideo.getVideo().getImage()));
+                new ShareAction(this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                        .withMedia(umVideoWEIXIN_CIRCLE)
+                        .setCallback(umShareListener).share();
                 break;
             case R.id.share_weibo_btn:
                 popupWindow.dismiss();
+                UMVideo umVideoSINA = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                umVideoSINA.setH5Url(cateVideo.getVideo().getShare_url());
+                umVideoSINA.setTitle(cateVideo.getVideo().getTitle());
+                umVideoSINA.setThumb(new UMImage(this,cateVideo.getVideo().getImage()));
                 new ShareAction(this).setPlatform(SHARE_MEDIA.SINA)
-                        .withText("测试分享")
+                        .withMedia(umVideoSINA)
                         .setCallback(umShareListener).share();
                 break;
             case R.id.share_alipay_btn:
-                new ShareAction(this).setPlatform(SHARE_MEDIA.ALIPAY)
-                        .withText("测试分享")
+                popupWindow.dismiss();
+                UMVideo umVideoALIPAY = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                umVideoALIPAY.setH5Url(cateVideo.getVideo().getShare_url());
+                umVideoALIPAY.setTitle(cateVideo.getVideo().getTitle());
+                umVideoALIPAY.setThumb(new UMImage(this,cateVideo.getVideo().getImage()));
+                new ShareAction(this).setPlatform(SHARE_MEDIA.SINA)
+                        .withMedia(umVideoALIPAY)
                         .setCallback(umShareListener).share();
                 break;
-            case R.id.share_copy_link_btn:
+            case R.id.share_copy_link_btn :
                 // 从API11开始android推荐使用android.content.ClipboardManager
                 // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
                 ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 // 将文本内容放到系统剪贴板里。
                 cm.setText(cateVideo.getVideo().getTitle() + "\n" + cateVideo.getVideo().getShare_url());
                 Toast.makeText(this, "复制成功，可以发给朋友们啦！", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.curtain_btn:
+                loadVideoInfo(recentlyVideoList.iterator().next().getVideo_id(), false);
                 break;
         }
     }
@@ -377,7 +435,9 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
                             ToastUtils.show(VideoViewActivity.this, "没有找到数据", Toast.LENGTH_SHORT);
                             VideoViewActivity.this.finish();
                         }
-                        //videoView.close();
+                        info_span1.setVisibility(View.VISIBLE);
+                        info_span2.setVisibility(View.VISIBLE);
+
                         videoView.startPlay(cateVideo.getVideo().getVideo_url_sd());
                         videoView.setSosCateVideo(cateVideo);
                         videoTitleTextView.setText(cateVideo.getVideo().getTitle());
@@ -486,6 +546,8 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        videoView.stopPlayback();
+        UMShareAPI.get(this).release();
     }
 
     public static void start(Context context, int id) {
@@ -515,5 +577,12 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+        videoView.pausePlay();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        videoView.startPlayVideo();
     }
 }

@@ -71,9 +71,9 @@ public class EpisodeActivity extends BaseActivity implements View.OnClickListene
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.putExtra("id", gridData.get(i).getVideo_id());
-                setResult(2,intent);
+                setResult(2, intent);
                 finish();
             }
         });
@@ -217,5 +217,11 @@ public class EpisodeActivity extends BaseActivity implements View.OnClickListene
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        this.overridePendingTransition(R.anim.episode_activity_silde_in, R.anim.episode_activity_silde_out);
     }
 }

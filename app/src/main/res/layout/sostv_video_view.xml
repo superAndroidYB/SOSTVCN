@@ -20,6 +20,20 @@
         android:layout_marginBottom="@dimen/y20"/>
 
     <FrameLayout
+        android:id="@+id/curtain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/black"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/curtain_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/audio_suspend"/>
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/progressbar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -31,30 +45,31 @@
 
             <ImageView
                 android:id="@+id/video_probar"
-                android:layout_width="@dimen/x80"
-                android:layout_height="@dimen/y80"
-                android:src="@drawable/loading_animation"
-                android:layout_alignParentLeft="true" />
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/y40"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/loading_animation"/>
 
             <TextView
                 android:id="@+id/percent_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x15"
-                android:textColor="@color/default_seach_color"
-                android:textSize="@dimen/x25"
-                android:text=" 0%"
-                android:layout_centerVertical="true"/>
+                android:layout_toRightOf="@id/video_probar"
+                android:text="0%"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x25"/>
 
             <TextView
                 android:id="@+id/extra_textview"
-                android:layout_marginLeft="@dimen/x10"
-                android:layout_toRightOf="@id/video_probar"
-                android:textColor="@color/default_seach_color"
-                android:textSize="@dimen/x30"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_toRightOf="@id/percent_textview"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x25"/>
 
         </RelativeLayout>
 

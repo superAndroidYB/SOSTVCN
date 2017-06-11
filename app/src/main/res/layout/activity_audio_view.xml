@@ -80,12 +80,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/button_bg_click_selector"
                 android:src="@mipmap/audio_play_collection"/>
             <ImageView
                 android:id="@+id/audio_share_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/button_bg_click_selector"
                 android:src="@mipmap/audio_play_share"/>
 
             <ImageView
@@ -93,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/button_bg_click_selector"
                 android:src="@mipmap/audio_play_download"/>
 
             <ImageView
@@ -100,6 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/button_bg_click_selector"
                 android:src="@mipmap/audio_play_delete"/>
         </LinearLayout>
 
@@ -157,6 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:background="@drawable/button_bg_click_selector"
             android:src="@mipmap/audio_play_randow"/>
         <ImageView
             android:id="@+id/player_previous_btn"
@@ -164,6 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:background="@drawable/button_bg_click_selector"
             android:src="@mipmap/audio_play_last"/>
 
         <ImageView
@@ -172,6 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:background="@drawable/button_bg_click_selector"
             android:src="@mipmap/audio_play"/>
 
         <ImageView
@@ -180,6 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:background="@drawable/button_bg_click_selector"
             android:src="@mipmap/audio_play_next"/>
 
         <ImageView
@@ -188,6 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:background="@drawable/button_bg_click_selector"
             android:src="@mipmap/audio_playlist"/>
     </LinearLayout>
 

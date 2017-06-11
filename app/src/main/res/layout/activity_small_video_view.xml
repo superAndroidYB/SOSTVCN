@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
-                android:layout_marginRight="@dimen/x30">
+                android:layout_marginRight="@dimen/x30" android:id="@+id/info_span1">
 
                 <TextView
                     android:id="@+id/video_title_view"
@@ -76,8 +76,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/video_title_view"
-                    android:background="@mipmap/video_intro_arrow_down"
-                    android:padding="@dimen/x10"/>
+                    android:padding="@dimen/x15" android:src="@mipmap/video_intro_arrow_down"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -93,7 +92,7 @@
                 android:layout_height="@dimen/y80"
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_marginRight="@dimen/x30"
-                android:orientation="horizontal">
+                android:orientation="horizontal" android:id="@+id/info_span2">
 
                 <ImageView
                     android:id="@+id/flag_imageview"

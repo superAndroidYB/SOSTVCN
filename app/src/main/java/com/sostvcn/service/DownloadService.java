@@ -117,6 +117,7 @@ public class DownloadService extends Service {
     private synchronized void startTask(SosDownloadBean bean) {
         bean.setStatus(Constants.DOWNLOADING);
         allTaskList.put(bean.getUrl(), bean);
+        ToastUtils.show(this, bean.getTitle() + "开始下载中！", Toast.LENGTH_SHORT);
         executor.execute(new DownloadThread(bean, new DownloadListenter()));
     }
 
