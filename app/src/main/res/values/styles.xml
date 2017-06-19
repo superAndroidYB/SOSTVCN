@@ -40,6 +40,11 @@
         <item name="android:windowExitAnimation">@anim/share_button_out</item>
     </style>
 
+    <style name="VideoPopViewRight" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/video_popview_right_in</item>
+        <item name="android:windowExitAnimation">@anim/video_popview_right_out</item>
+    </style>
+
     <style name="SostvShareDialogStyleBottom" parent="android:Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/ShareButtonBottom</item>
         <item name="android:windowFrame">@null</item>

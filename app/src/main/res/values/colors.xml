@@ -25,4 +25,5 @@
     <color name="spiner_text_default">#282828</color>
 
     <color name="whitesmoke">#F5F5F5</color>
+    <color name="popbg">#85535353</color>
 </resources>

@@ -437,6 +437,7 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
             return true;
         }
 
+
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE && Math.abs(velocityX) > FLING_MIN_VELOCITY) {

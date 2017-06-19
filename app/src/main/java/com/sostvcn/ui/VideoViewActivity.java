@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,19 +26,21 @@ import android.widget.Toast;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sostvcn.R;
 import com.sostvcn.adapter.RecentlyVideoListViewAdapter;
+import com.sostvcn.adapter.SostvCacheListAdapter;
 import com.sostvcn.api.VideoPageApi;
 import com.sostvcn.gateway.callback.ProgressSubscriber;
 import com.sostvcn.gateway.callback.SubscriberOnNextListener;
 import com.sostvcn.gateway.http.HttpUtils;
 import com.sostvcn.helper.CollectHelper;
-import com.sostvcn.helper.DownLoadHelper;
 import com.sostvcn.model.BaseListResponse;
 import com.sostvcn.model.BaseObjectResponse;
 import com.sostvcn.model.RecentlyVideo;
 import com.sostvcn.model.SosCateVideo;
 import com.sostvcn.model.SosCollectEntity;
 import com.sostvcn.utils.Constants;
+import com.sostvcn.utils.DateUtils;
 import com.sostvcn.utils.ToastUtils;
+import com.sostvcn.widget.SosSpinerView;
 import com.sostvcn.widget.SostvListView;
 import com.sostvcn.widget.SostvVideoView;
 import com.sostvcn.widget.VideoMediaController;
@@ -48,7 +52,11 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.vov.vitamio.widget.VideoView;
 import rx.android.schedulers.AndroidSchedulers;
@@ -97,7 +105,6 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
     private View info_span1;
     @ViewInject(R.id.info_span2)
     private View info_span2;
-
 
     private List<RecentlyVideo> recentlyVideoList;
     private RecentlyVideoListViewAdapter recentlyVideoListViewAdapter;
@@ -298,7 +305,9 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
                 Toast.makeText(this, "复制成功，可以发给朋友们啦！", Toast.LENGTH_LONG).show();
                 break;
             case R.id.curtain_btn:
-                loadVideoInfo(recentlyVideoList.iterator().next().getVideo_id(), false);
+                if(!recentlyVideoList.isEmpty()){
+                    loadVideoInfo(recentlyVideoList.iterator().next().getVideo_id(), false);
+                }
                 break;
         }
     }
@@ -411,10 +420,114 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
         });
 
         popupWindow.showAtLocation(getLayoutInflater().inflate(R.layout.activity_small_video_view, null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-        TextView hd = (TextView) popupWindowView.findViewById(R.id.download_hd);
+        final TextView hd = (TextView) popupWindowView.findViewById(R.id.download_hd);
         TextView sd = (TextView) popupWindowView.findViewById(R.id.download_sd);
         hd.setOnClickListener(this);
         sd.setOnClickListener(this);
+    }
+
+    /**
+     * 弹出操作列表
+     */
+    public void showCacheListPopWindow(int id) {
+        TextView all_cache_btn;
+
+        View popupWindowView = getLayoutInflater().inflate(R.layout.video_optionlist_view, null);
+        PopupWindow popupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+                return false;
+            }
+        });
+        popupWindow.setAnimationStyle(R.style.VideoPopViewRight);
+
+        popupWindow.showAtLocation(getLayoutInflater().inflate(R.layout.sostv_video_view, null), Gravity.RIGHT, 0, 500);
+        final ListView cacheListView = (ListView) popupWindowView.findViewById(R.id.video_cache_list_view);
+        final SosSpinerView qxdSelector = (SosSpinerView) popupWindowView.findViewById(R.id.shdh_selector);
+
+        final SosSpinerView yearSelector = (SosSpinerView) popupWindowView.findViewById(R.id.year_selector);
+        all_cache_btn = (TextView) popupWindowView.findViewById(R.id.all_cache_btn);
+
+        List<String> qxdSelectorDatas = new ArrayList<>();
+        qxdSelectorDatas.add("高清");
+        qxdSelectorDatas.add("标清");
+        qxdSelector.setYearTextView("高清");
+        qxdSelector.setConfig(this, qxdSelectorDatas, new SosSpinerView.OnSelectedClikcListener() {
+            @Override
+            public void onSelectedEvent(String value) {
+                qxdSelector.setYearTextView(value);
+            }
+        }, getLayoutId());
+
+
+        api.loadAllVideo(id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ProgressSubscriber<BaseListResponse<SosCateVideo.Video>>(new SubscriberOnNextListener<BaseListResponse<SosCateVideo.Video>>() {
+                    @Override
+                    public void onNext(BaseListResponse<SosCateVideo.Video> videoBaseListResponse) {
+                        final Map<String, List<SosCateVideo.Video>> map = new HashMap<>();
+                        boolean isGroup = true;
+                        for (SosCateVideo.Video video : videoBaseListResponse.getResults()) {
+                            String year;
+                            if (!DateUtils.isValidDate(video.getDate()) || videoBaseListResponse.getResults().size() <= 50) {
+                                isGroup = false;
+                                break;
+                            }
+                            if (video.getDate().length() > 4) {
+                                year = video.getDate().substring(0, 4) + "年";
+                            } else {
+                                year = video.getTitle() + "-" + video.getDate();
+                            }
+                            if (map.get(year) != null) {
+                                map.get(year).add(video);
+                                map.put(year, map.get(year));
+                            } else {
+                                List<SosCateVideo.Video> videos = new ArrayList<SosCateVideo.Video>();
+                                videos.add(video);
+                                map.put(year, videos);
+                            }
+                        }
+
+                        List<String> temp = new ArrayList<>();
+                        temp.addAll(map.keySet());
+                        Collections.sort(temp);
+                        List<String> datas = new ArrayList<>();
+                        for (int i = temp.size() - 1; i >= 0; i--) {
+                            datas.add(temp.get(i));
+                        }
+
+
+                        if (isGroup) {
+                            yearSelector.setVisibility(View.VISIBLE);
+                            yearSelector.setYearTextView(datas.iterator().next());
+
+                            SostvCacheListAdapter adapter = new SostvCacheListAdapter(VideoViewActivity.this, map.get(datas.iterator().next()));
+                            cacheListView.setAdapter(adapter);
+
+                            yearSelector.setConfig(VideoViewActivity.this, datas, new SosSpinerView.OnSelectedClikcListener() {
+                                @Override
+                                public void onSelectedEvent(String value) {
+                                    yearSelector.setYearTextView(value);
+                                    SostvCacheListAdapter adapter = new SostvCacheListAdapter(VideoViewActivity.this, map.get(value));
+                                    cacheListView.setAdapter(adapter);
+                                }
+                            },getLayoutId());
+                        } else {
+                            yearSelector.setVisibility(View.GONE);
+                            SostvCacheListAdapter adapter = new SostvCacheListAdapter(VideoViewActivity.this, videoBaseListResponse.getResults());
+                            cacheListView.setAdapter(adapter);
+                        }
+                    }
+                }, this));
     }
 
     /**
@@ -494,7 +607,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
 
         @Override
         public void showCacheListView() {
-            DownLoadHelper.showCacheListPopWindow(VideoViewActivity.this, api, cateVideo.getCate().getCate_id());
+            showCacheListPopWindow(cateVideo.getCate().getCate_id());
         }
 
         @Override

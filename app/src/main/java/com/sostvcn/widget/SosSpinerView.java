@@ -3,8 +3,9 @@ package com.sostvcn.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,7 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
     private Activity activity;
     private PopupWindow popupWindow;
     private OnSelectedClikcListener listener;
+    private int layout;
 
     public SosSpinerView(Context context) {
         super(context);
@@ -54,15 +56,15 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
     }
 
 
-    public void setConfig(Activity activity, List<String> datas, OnSelectedClikcListener listener) {
+    public void setConfig(Activity activity, List<String> datas, OnSelectedClikcListener listener, int layout) {
         this.activity = activity;
         this.datas = datas;
         this.listener = listener;
+        this.layout = layout;
     }
 
     public void setYearTextView(String year) {
         yearTextView.setText(year);
-
     }
 
     private void initView(AttributeSet attrs) {
@@ -73,9 +75,9 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
 
         TypedArray a = context.obtainStyledAttributes(attrs,
                 R.styleable.SosSpinerView);
-        float textSize = a.getDimension(R.styleable.SosSpinerView_textSize,getResources().getDimension(R.dimen.x30));
+        float textSize = a.getDimension(R.styleable.SosSpinerView_textSize, getResources().getDimension(R.dimen.x30));
         yearTextView.setTextSize(textSize);
-        int textColor = a.getColor(R.styleable.SosSpinerView_textColor,getResources().getColor(R.color.spiner_text_default));
+        int textColor = a.getColor(R.styleable.SosSpinerView_textColor, getResources().getColor(R.color.spiner_text_default));
         yearTextView.setTextColor(textColor);
     }
 
@@ -95,10 +97,12 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
         if (activity != null) {
             View popupWindowView = activity.getLayoutInflater().inflate(R.layout.spiner_popup_layout, null);
             if (popupWindow == null) {
-                popupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                //popupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                popupWindow = new PopupWindow(popupWindowView, (int) getResources().getDimension(R.dimen.x500), ViewGroup.LayoutParams.WRAP_CONTENT, true);
                 popupWindow.setFocusable(true);
                 popupWindow.setOutsideTouchable(true);
-                popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                ColorDrawable drawable = new ColorDrawable(85000000);
+                popupWindow.setBackgroundDrawable(drawable);
                 popupWindow.setTouchInterceptor(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -118,7 +122,11 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
                 yearListView.setAdapter(new ListAdapter());
                 yearListView.setOnItemClickListener(this);
             }
-            popupWindow.showAsDropDown(yearTextView);
+            int[] location = new int[2];
+            yearTextView.getLocationOnScreen(location);
+            int x = location[0];
+            int y = location[1] + yearTextView.getHeight();
+            popupWindow.showAtLocation(activity.getLayoutInflater().inflate(layout, null), Gravity.TOP, x, y);
         }
     }
 

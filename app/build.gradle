@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.antfortune.freeline'
 
 android {
     compileSdkVersion 24
@@ -72,6 +73,11 @@ dependencies {
 
     //友盟统计
     compile 'com.umeng.analytics:analytics:latest.integration'
+
+    //freeline
+    debugCompile 'com.antfortune.freeline:runtime:0.8.7'
+    releaseCompile 'com.antfortune.freeline:runtime-no-op:0.8.7'
+    testCompile 'com.antfortune.freeline:runtime-no-op:0.8.7'
     /*compile fileTree(dir: 'src/main/jniLibs', include: ['*.jar'])
 
     compile 'com.android.support:support-v4:24.2.1'

@@ -35,8 +35,9 @@
 
     <FrameLayout
         android:id="@+id/progressbar"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" android:layout_centerHorizontal="true">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -80,9 +81,8 @@
         android:layout_width="@dimen/x300"
         android:layout_height="@dimen/y150"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/y88"
-        android:background="@drawable/videofull_progess_shape"
-        android:visibility="gone">
+        android:layout_marginTop="@dimen/y100"
+        android:background="@drawable/videofull_progess_shape" android:visibility="gone">
 
         <ImageView
             android:id="@+id/kjkt_image_view"
