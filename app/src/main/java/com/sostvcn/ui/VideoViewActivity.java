@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -426,6 +428,138 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
         sd.setOnClickListener(this);
     }
 
+
+    /**
+     * 全屏播放时弹出分享界面
+     */
+    public void showShareListPopWindeow(){
+        View popupWindowView = getLayoutInflater().inflate(R.layout.video_full_share_view, null);
+        final PopupWindow popupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+                return false;
+            }
+        });
+        popupWindow.setAnimationStyle(R.style.VideoPopViewRight);
+        popupWindow.showAtLocation(getLayoutInflater().inflate(R.layout.sostv_video_view, null), Gravity.RIGHT, 0, 500);
+
+        final int[] icons = new int[]{R.mipmap.videofull_share_qq,R.mipmap.videofull_share_qq_zone,R.mipmap.videofull_share_weixin,
+        R.mipmap.videofull_share_weixin_quan,R.mipmap.videofull_share_weibo,R.mipmap.share_alipay,R.mipmap.videofull_share_copy_link};
+        final String[] titles = new String[]{"QQ","QQ空间","微信","微信朋友圈","微博","支付宝好友","复制链接"};
+        GridView shareList = (GridView) popupWindowView.findViewById(R.id.videofull_share_list);
+        shareList.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return icons.length;
+            }
+
+            @Override
+            public Object getItem(int i) {
+                return icons[i];
+            }
+
+            @Override
+            public long getItemId(int i) {
+                return i;
+            }
+
+            @Override
+            public View getView(int i, View view, ViewGroup viewGroup) {
+                if(view == null){
+                    view = getLayoutInflater().inflate(R.layout.video_full_share_list_item,null);
+                }
+                ImageView imageView = (ImageView)view.findViewById(R.id.icon);
+                TextView textView = (TextView)view.findViewById(R.id.title);
+                imageView.setImageResource(icons[i]);
+                textView.setText(titles[i]);
+                return view;
+            }
+        });
+
+        shareList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch(i){
+                    case 0:
+                        popupWindow.dismiss();
+                        UMVideo umVideoQQ = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                        umVideoQQ.setH5Url(cateVideo.getVideo().getShare_url());
+                        umVideoQQ.setTitle(cateVideo.getVideo().getTitle());
+                        umVideoQQ.setThumb(new UMImage(VideoViewActivity.this,cateVideo.getVideo().getImage()));
+                        new ShareAction(VideoViewActivity.this).setPlatform(SHARE_MEDIA.QQ)
+                                .withMedia(umVideoQQ)
+                                .setCallback(umShareListener).share();
+                        break;
+                    case 1:
+                        popupWindow.dismiss();
+                        UMVideo umVideoQZONE = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                        umVideoQZONE.setH5Url(cateVideo.getVideo().getShare_url());
+                        umVideoQZONE.setTitle(cateVideo.getVideo().getTitle());
+                        umVideoQZONE.setThumb(new UMImage(VideoViewActivity.this,cateVideo.getVideo().getImage()));
+                        new ShareAction(VideoViewActivity.this).setPlatform(SHARE_MEDIA.QZONE)
+                                .withMedia(umVideoQZONE)
+                                .setCallback(umShareListener).share();
+                        break;
+                    case 2:
+                        popupWindow.dismiss();
+                        UMVideo umVideoWEIXIN = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                        umVideoWEIXIN.setH5Url(cateVideo.getVideo().getShare_url());
+                        umVideoWEIXIN.setTitle(cateVideo.getVideo().getTitle());
+                        umVideoWEIXIN.setThumb(new UMImage(VideoViewActivity.this,cateVideo.getVideo().getImage()));
+                        new ShareAction(VideoViewActivity.this).setPlatform(SHARE_MEDIA.WEIXIN)
+                                .withMedia(umVideoWEIXIN)
+                                .setCallback(umShareListener).share();
+                        break;
+                    case 3:
+                        popupWindow.dismiss();
+                        UMVideo umVideoWEIXIN_CIRCLE = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                        umVideoWEIXIN_CIRCLE.setH5Url(cateVideo.getVideo().getShare_url());
+                        umVideoWEIXIN_CIRCLE.setTitle(cateVideo.getVideo().getTitle());
+                        umVideoWEIXIN_CIRCLE.setThumb(new UMImage(VideoViewActivity.this,cateVideo.getVideo().getImage()));
+                        new ShareAction(VideoViewActivity.this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                                .withMedia(umVideoWEIXIN_CIRCLE)
+                                .setCallback(umShareListener).share();
+                        break;
+                    case 4:
+                        popupWindow.dismiss();
+                        UMVideo umVideoSINA = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                        umVideoSINA.setH5Url(cateVideo.getVideo().getShare_url());
+                        umVideoSINA.setTitle(cateVideo.getVideo().getTitle());
+                        umVideoSINA.setThumb(new UMImage(VideoViewActivity.this,cateVideo.getVideo().getImage()));
+                        new ShareAction(VideoViewActivity.this).setPlatform(SHARE_MEDIA.SINA)
+                                .withMedia(umVideoSINA)
+                                .setCallback(umShareListener).share();
+                        break;
+                    case 5:
+                        popupWindow.dismiss();
+                        UMVideo umVideoALIPAY = new UMVideo(cateVideo.getVideo().getVideo_url_sd());
+                        umVideoALIPAY.setH5Url(cateVideo.getVideo().getShare_url());
+                        umVideoALIPAY.setTitle(cateVideo.getVideo().getTitle());
+                        umVideoALIPAY.setThumb(new UMImage(VideoViewActivity.this,cateVideo.getVideo().getImage()));
+                        new ShareAction(VideoViewActivity.this).setPlatform(SHARE_MEDIA.SINA)
+                                .withMedia(umVideoALIPAY)
+                                .setCallback(umShareListener).share();
+                        break;
+                    case 6:
+                        // 从API11开始android推荐使用android.content.ClipboardManager
+                        // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+                        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        // 将文本内容放到系统剪贴板里。
+                        cm.setText(cateVideo.getVideo().getTitle() + "\n" + cateVideo.getVideo().getShare_url());
+                        Toast.makeText(VideoViewActivity.this, "复制成功，可以发给朋友们啦！", Toast.LENGTH_LONG).show();
+                        break;
+                }
+            }
+        });
+    }
+
     /**
      * 弹出操作列表
      */
@@ -612,7 +746,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
 
         @Override
         public void showShareMenuView() {
-
+            showShareListPopWindeow();
         }
     }
 
