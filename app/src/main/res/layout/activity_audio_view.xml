@@ -23,7 +23,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x30" android:src="@mipmap/audio_play_back"/>
+                android:layout_marginLeft="@dimen/x30" android:src="@mipmap/audio_play_back"
+                android:background="@drawable/button_bg_click_selector"
+                android:padding="@dimen/x20"/>
 
             <TextView
                 android:id="@+id/title_text_view"

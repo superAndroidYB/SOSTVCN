@@ -97,7 +97,6 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
     private SosCollectEntity collectEntity;
     private PopupWindow popupWindow;
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_audio_view;
@@ -207,6 +206,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.back_btn:
+                finish();
                 break;
             case R.id.audio_collect_btn:
                 if (collectEntity == null) {
@@ -289,48 +289,22 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
              * 分享按钮
              */
             case R.id.share_qq_btn:
-                popupWindow.dismiss();
-
+                actionShare(SHARE_MEDIA.QQ);
                 break;
             case R.id.share_qq_zone_btn:
-                popupWindow.dismiss();
-
+                actionShare(SHARE_MEDIA.QZONE);
                 break;
             case R.id.share_weixin_btn:
-                popupWindow.dismiss();
-                UMusic wxmusic = new UMusic(medias.getVoice_list().get(postion).getMp3());
-                wxmusic.setTitle(medias.getVoice_list().get(postion).getTitle());//音乐的标题
-                //wxmusic.setmTargetUrl(medias.getShare_url());//QQ好友微信好友可以设置跳转链接
-                wxmusic.setH5Url(medias.getShare_url());
-                wxmusic.setThumb(new UMImage(this, medias.getVoice_list().get(postion).getCover()));//音乐的缩略图
-                wxmusic.setDescription(medias.getAlbum_title());//音乐的描述
-
-                new ShareAction(this).setPlatform(SHARE_MEDIA.WEIXIN)
-                        .withMedia(wxmusic)
-                        .setCallback(umShareListener).share();
+                actionShare(SHARE_MEDIA.WEIXIN);
                 break;
             case R.id.share_weixin_quan_btn:
-                popupWindow.dismiss();
-                UMusic circlemusic = new UMusic(medias.getVoice_list().get(postion).getMp3());
-                circlemusic.setTitle(medias.getVoice_list().get(postion).getTitle());//音乐的标题
-                circlemusic.setmTargetUrl(medias.getShare_url());//QQ好友微信好友可以设置跳转链接
-                circlemusic.setH5Url(medias.getShare_url());
-                circlemusic.setThumb(new UMImage(this, medias.getVoice_list().get(postion).getCover()));//音乐的缩略图
-                circlemusic.setDescription(medias.getAlbum_title());//音乐的描述
-
-                new ShareAction(this).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                        .withMedia(circlemusic)
-                        .setCallback(umShareListener).share();
+                actionShare(SHARE_MEDIA.WEIXIN_CIRCLE);
                 break;
             case R.id.share_weibo_btn:
-                popupWindow.dismiss();
-
+                actionShare(SHARE_MEDIA.SINA);
                 break;
             case R.id.share_alipay_btn:
-                popupWindow.dismiss();
-                new ShareAction(this).setPlatform(SHARE_MEDIA.ALIPAY)
-                        .withText("测试分享")
-                        .setCallback(umShareListener).share();
+                actionShare(SHARE_MEDIA.ALIPAY);
                 break;
             case R.id.share_copy_link_btn:
                 // 从API11开始android推荐使用android.content.ClipboardManager
@@ -343,6 +317,19 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
                 popupWindow.dismiss();
                 break;
         }
+    }
+
+    private void actionShare(SHARE_MEDIA type){
+        popupWindow.dismiss();
+        UMusic wxmusic = new UMusic(medias.getVoice_list().get(postion).getMp3());
+        wxmusic.setTitle(medias.getVoice_list().get(postion).getTitle());//音乐的标题
+        wxmusic.setH5Url(medias.getShare_url());
+        wxmusic.setThumb(new UMImage(this, medias.getVoice_list().get(postion).getCover()));//音乐的缩略图
+        wxmusic.setDescription(medias.getAlbum_title());//音乐的描述
+
+        new ShareAction(this).setPlatform(type)
+                .withMedia(wxmusic)
+                .setCallback(umShareListener).share();
     }
 
     /**
@@ -388,7 +375,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         share_alipay_btn.setOnClickListener(this);
         share_copy_link_btn.setOnClickListener(this);
 
-        popupWindow.showAtLocation(getLayoutInflater().inflate(R.layout.activity_small_video_view, null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        popupWindow.showAtLocation(getLayoutInflater().inflate(getLayoutId(), null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
     private UMShareListener umShareListener = new UMShareListener() {
@@ -427,27 +414,28 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
                 player_pause_btn.setImageResource(R.mipmap.audio_play);
                 player_pause_btn.setTag(R.mipmap.audio_play);
 
+                int totalTime = (int) intent.getLongExtra("totalTime", 0);
+                total_time.setText(timeconvert(totalTime));
+                sb_audio_view.setMax(totalTime);
+
                 // 当服务开始播放音乐后，将专辑图片添加旋转动画效果
                 Animation operatingAnim = AnimationUtils.loadAnimation(AudioViewActivity.this, R.anim.tip);
                 LinearInterpolator lin = new LinearInterpolator();
                 operatingAnim.setInterpolator(lin);
-                if (operatingAnim != null) {
-                    specima_image_view.startAnimation(operatingAnim);
-                }
+                specima_image_view.startAnimation(operatingAnim);
+
             } else if (Constants.ACTION_SERVICR_PUASE.equals(intent.getAction())) {
                 specima_image_view.clearAnimation();
                 player_pause_btn.setImageResource(R.mipmap.audio_suspend);
                 player_pause_btn.setTag(R.mipmap.audio_suspend);
+
             } else if (Constants.ACTION_PLAY.equals(intent.getAction())) {
 
             } else if (Constants.ACTION_MUSIC_PLAN.equals(intent.getAction())) {
                 int playerPosition = (int) intent.getLongExtra("playerPosition", 0);
-                int totalTime = (int) intent.getLongExtra("totalTime", 0);
                 String playerTime = timeconvert(playerPosition);
                 sb_audio_view.setProgress(playerPosition);
                 current_time.setText(playerTime);
-                total_time.setText(timeconvert(totalTime));
-                sb_audio_view.setMax(totalTime);
                 sb_audio_view.invalidate();
             }
         }
@@ -496,6 +484,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();
+        unregisterReceiver(broadcastReceiver);
     }
 
     @Override

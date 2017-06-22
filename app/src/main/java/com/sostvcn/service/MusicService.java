@@ -134,11 +134,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mPlayer = new MediaPlayer(this, true);
-        medias = (SosAudioList) intent.getSerializableExtra("medias");
-        position = intent.getIntExtra("position", 0);
-        initNotification();
-        prepareMusic(position);
+        if(intent != null){
+            mPlayer = new MediaPlayer(this, true);
+            medias = (SosAudioList) intent.getSerializableExtra("medias");
+            position = intent.getIntExtra("position", 0);
+            initNotification();
+            prepareMusic(position);
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -254,15 +256,9 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             public void run() {
                 Intent intent = new Intent();
                 while (isPlay_No) {
-                    long playerPosition = 0;
-                    long totalTime = 0;
-                    if(mPlayer.isPlaying()){
-                        playerPosition = mPlayer.getCurrentPosition();
-                        totalTime = mPlayer.getDuration();
-                    }
+                    long playerPosition = mPlayer.getCurrentPosition();
                     intent.setAction(Constants.ACTION_MUSIC_PLAN);
                     intent.putExtra("playerPosition", playerPosition);
-                    intent.putExtra("totalTime", totalTime);
                     sendBroadcast(intent);
                     Log.v("jindu", "发到界面的进度条值1:" + playerPosition);
                     try {
@@ -332,7 +328,9 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public void sendPlayingWord(int position) {
         Intent intent = new Intent();
         intent.setAction(Constants.ACTION_PlAYING_STATE);
+        long totalTime = mPlayer.getDuration();
         intent.putExtra("media", position);
+        intent.putExtra("totalTime", totalTime);
         sendBroadcast(intent);
     }
 
