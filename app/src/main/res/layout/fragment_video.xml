@@ -11,6 +11,7 @@
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:tabIndicatorColor="#1E82D2"
         app:tabSelectedTextColor="#1E82D2"
         app:tabTextColor="#282828"/>
