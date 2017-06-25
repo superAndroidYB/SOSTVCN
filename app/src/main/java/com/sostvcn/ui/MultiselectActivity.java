@@ -32,6 +32,7 @@ public class MultiselectActivity extends BaseActivity implements AdapterView.OnC
 
     private SosAudioList audioList;
     private MultiselectListAdapter adapter;
+    private boolean isYetAll = false;
 
     @Override
     protected int getLayoutId() {
@@ -44,10 +45,17 @@ public class MultiselectActivity extends BaseActivity implements AdapterView.OnC
 
         downaudio_btn.setOnClickListener(this);
         deleteaudio_btn.setOnClickListener(this);
+        quanxuan_btn.setOnClickListener(this);
         cancel_btn.setOnClickListener(this);
 
         adapter = new MultiselectListAdapter(this, audioList);
         multi_list_view.setAdapter(adapter);
+        multi_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                adapter.setIsSelected(i);
+            }
+        });
     }
 
     @Override
@@ -63,6 +71,10 @@ public class MultiselectActivity extends BaseActivity implements AdapterView.OnC
 
                 break;
             case R.id.deleteaudio_btn:
+                break;
+            case R.id.quanxuan_btn:
+                adapter.allSelected(!isYetAll);
+                isYetAll = !isYetAll;
                 break;
             case R.id.cancel_btn:
                 this.finish();
