@@ -271,6 +271,7 @@ public class SpecialActivity extends BaseActivity implements ReboundScrollView.R
 
 
             case R.id.audio_multiselect_btn:
+                startMultiselectActivity();
                 break;
             case R.id.toolbar_back:
                 finish();
@@ -314,7 +315,16 @@ public class SpecialActivity extends BaseActivity implements ReboundScrollView.R
         }
     }
 
-    private void actionShare(SHARE_MEDIA type){
+    private void startMultiselectActivity() {
+        Intent intent = new Intent(this, MultiselectActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("audioList",audioList);
+        intent.putExtras(bundle);
+        this.startActivity(intent);
+        this.overridePendingTransition(R.anim.episode_activity_silde_in, R.anim.episode_activity_silde_out);
+    }
+
+    private void actionShare(SHARE_MEDIA type) {
         popupWindow.dismiss();
         UMWeb web = new UMWeb(audioList.getShare_url());
         web.setTitle(audioList.getAlbum_title());//标题

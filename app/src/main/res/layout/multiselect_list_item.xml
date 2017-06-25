@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="@dimen/x30"
+              android:layout_marginRight="@dimen/x30"
+              android:minHeight="@dimen/y80"
+              android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/selected_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"/>
+
+
+    <TextView
+        android:id="@+id/audio_titile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="我们的故事"
+        android:textColor="#232323"
+        android:textSize="@dimen/x30"/>
+
+    <CheckBox
+        android:id="@+id/download_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"/>
+
+</LinearLayout>

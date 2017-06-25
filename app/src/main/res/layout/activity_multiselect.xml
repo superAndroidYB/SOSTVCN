@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sostvcn.ui.MultiselectActivity">
+
+    <include layout="@layout/multiselsect_toolbal_layout"></include>
+
+    <RelativeLayout
+        android:id="@+id/oper_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:background="@color/black"/>
+
+        <TextView
+            android:id="@+id/downaudio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x222"
+            android:drawableTop="@mipmap/audio_album_multiselect_download"
+            android:text="@string/downloadstr"
+            android:textColor="@drawable/tab_text_switch_selector"
+            android:textSize="@dimen/x24"/>
+
+        <TextView
+            android:id="@+id/deleteaudio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x222"
+            android:drawableTop="@mipmap/audio_album_multiselect_delete"
+            android:text="@string/deletestr"
+            android:textColor="@drawable/tab_text_switch_selector"
+            android:textSize="@dimen/x24"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/multi_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/y120"
+        android:layout_marginTop="@dimen/x100">
+    </ListView>
+
+</RelativeLayout>
