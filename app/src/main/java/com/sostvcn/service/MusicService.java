@@ -26,6 +26,9 @@ import com.sostvcn.model.SosAudioList;
 import com.sostvcn.receiver.TrackNextReceiver;
 import com.sostvcn.receiver.TrackPlayReceiver;
 import com.sostvcn.utils.Constants;
+import com.sostvcn.utils.SPUtils;
+
+import java.util.Random;
 
 import io.vov.vitamio.MediaPlayer;
 
@@ -210,14 +213,29 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        if (mp != null) {
-            if (position == medias.getVoice_list().size() - 1) {
-                position = 0;
-            } else {
-                position = position + 1;
-            }
-            prepareMusic(position);
+        //0 列表循环
+        //1 单曲循环
+        //2 随机播放
+        int playWayIndex = (int) SPUtils.get(this, "playWayIndex", 0);
+        switch (playWayIndex){
+            case 0:
+                if (mp != null) {
+                    if (position == medias.getVoice_list().size() - 1) {
+                        position = 0;
+                    } else {
+                        position = position + 1;
+                    }
+                    prepareMusic(position);
+                }
+                break;
+            case 1:
+                prepareMusic(position);
+                break;
+            case 2:
+                prepareMusic(new Random().nextInt(medias.getVoice_list().size()));
+                break;
         }
+
     }
 
     /******************************************************************
@@ -345,11 +363,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
         if (mPlayer.isPlaying()) {
             mRemoteView.setImageViewResource(R.id.btn_noti_pause, R.mipmap.notification_pause);
-
         } else {
-
             mRemoteView.setImageViewResource(R.id.btn_noti_pause, R.mipmap.notification_play);
-
         }
 
         // 获取专辑

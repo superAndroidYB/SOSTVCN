@@ -106,7 +106,7 @@ public class SpecialActivity extends BaseActivity implements ReboundScrollView.R
     private SosCollectEntity collectEntity;
     private CollectHelper collectHelper;
 
-    private AudioViewBroadcastReceiver broadcastReceiver;// 广播
+    private SpecialViewBroadcastReceiver broadcastReceiver;// 广播
     private IntentFilter filter;// 广播过滤器
 
     private PopupWindow popupWindow;
@@ -147,10 +147,22 @@ public class SpecialActivity extends BaseActivity implements ReboundScrollView.R
 
         loadData();
 
+        // 创建一个广播
+        broadcastReceiver = new SpecialViewBroadcastReceiver();
+
+        // 创建广播过滤器
+        filter = new IntentFilter();
+        filter.addAction(Constants.ACTION_PlAYING_STATE);
+        filter.addAction(Constants.ACTION_SERVICR_PUASE);
+        filter.addAction(Constants.ACTION_MUSIC_PLAN);
+        filter.addAction(Constants.ACTION_PLAY);
+        registerReceiver(broadcastReceiver, filter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 postion = i - 1;
+                listViewAdapter.setCurrentMp3(audioList.getVoice_list().get(postion).getMp3());
                 AudioViewActivity.start(SpecialActivity.this, audioList, postion);
             }
         });
@@ -318,7 +330,7 @@ public class SpecialActivity extends BaseActivity implements ReboundScrollView.R
     private void startMultiselectActivity() {
         Intent intent = new Intent(this, MultiselectActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("audioList",audioList);
+        bundle.putSerializable("audioList", audioList);
         intent.putExtras(bundle);
         this.startActivity(intent);
         this.overridePendingTransition(R.anim.episode_activity_silde_in, R.anim.episode_activity_silde_out);
@@ -376,11 +388,14 @@ public class SpecialActivity extends BaseActivity implements ReboundScrollView.R
     }
 
 
-    public class AudioViewBroadcastReceiver extends BroadcastReceiver {
+    public class SpecialViewBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-
+            if (Constants.ACTION_PlAYING_STATE.equals(intent.getAction())) {
+                int current = intent.getIntExtra("media", 0);
+                listViewAdapter.setCurrentMp3(audioList.getVoice_list().get(current).getMp3());
+            }
         }
     }
 

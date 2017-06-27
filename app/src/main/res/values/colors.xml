@@ -26,4 +26,5 @@
 
     <color name="whitesmoke">#F5F5F5</color>
     <color name="popbg">#85535353</color>
+    <color name="special_item_text_color">#242424</color>
 </resources>

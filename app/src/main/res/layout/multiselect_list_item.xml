@@ -27,7 +27,6 @@
 
     <ImageView
         android:id="@+id/download_image_view"
-        style="@style/download_check_sytle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

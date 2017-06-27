@@ -36,10 +36,14 @@ public class DownloadThread implements Runnable {
 
     @Override
     public void run() {
-        downloadFile = new File(PATH + "/" + bean.getType() + "/" + bean.getTitle() + ".octmp");
+        String prifx = ".octmp";
+        if (bean.getUrl() != null && !bean.getUrl().equals("")) {
+            prifx = bean.getUrl().substring(bean.getUrl().lastIndexOf("."), bean.getUrl().length());
+        }
+        downloadFile = new File(PATH + "/" + bean.getType() + "/" + bean.getTitle() + prifx);
         if (downloadFile.exists()) {
             fileSize = "bytes=" + downloadFile.length() + "-";
-        }else{
+        } else {
             boolean ic = createFile(downloadFile.getPath());
         }
 
