@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
 
-import com.antfortune.freeline.FreelineCore;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.sostvcn.api.NetWorkApi;
 import com.sostvcn.gateway.config.NetWorkConfiguration;
@@ -42,7 +41,6 @@ public class SostvApplication extends Application {
         //应用程序的上下文
         mContext = getApplicationContext();
 
-        FreelineCore.init(this);
         initOkHttpUtils();
 
         Config.DEBUG = true;

@@ -67,7 +67,7 @@ public class VideoMediaController extends FrameLayout implements
                 mMediaControl.onPlayTurn();
                 break;
             case R.id.expand:
-                mMediaControl.onPageTurn();
+                mMediaControl.showSharpnessView();
                 break;
             case R.id.shrink:
                 mMediaControl.onPageTurn();
@@ -227,6 +227,8 @@ public class VideoMediaController extends FrameLayout implements
         void showCacheListView();
 
         void showShareMenuView();
+
+        void showSharpnessView();
     }
 
 

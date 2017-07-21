@@ -52,14 +52,13 @@ public class HomeSlideAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			ImageView imageView = new ImageView(_context);
 			imageView.setAdjustViewBounds(true);
-			imageView.setScaleType(ScaleType.FIT_XY);
+			imageView.setScaleType(ScaleType.CENTER_CROP);
 			imageView.setLayoutParams(new LayoutParams(
 					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 			bitmapUtils.display(imageView,imgList.get(position).getImage());
 			convertView = imageView;
 			viewHolder.imageView = (ImageView) convertView;
 			convertView.setTag(viewHolder);
-
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}

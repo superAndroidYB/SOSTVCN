@@ -324,6 +324,11 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
         public void showShareMenuView() {
             mVideoPlayCallback.showShareMenuView();
         }
+
+        @Override
+        public void showSharpnessView() {
+            mVideoPlayCallback.showSharpnessView();
+        }
     };
 
     private void alwaysShowController() {
@@ -425,6 +430,8 @@ public class SostvVideoView extends RelativeLayout implements MediaPlayer.OnInfo
         void showCacheListView();
 
         void showShareMenuView();
+
+        void showSharpnessView();
     }
 
     class SosGestureListener extends GestureDetector.SimpleOnGestureListener {
