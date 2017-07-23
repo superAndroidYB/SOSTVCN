@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="@dimen/x500"
                 android:layout_height="match_parent"
-                android:background="#70000000">
+                android:background="#70000000"
+                android:minWidth="@dimen/x500">
 
     <TextView
         android:layout_width="match_parent"
@@ -11,7 +12,7 @@
         android:layout_marginTop="@dimen/x60"
         android:text="@string/qxd_str"
         android:textColor="@color/white"
-        android:textSize="@dimen/x24"/>
+        android:textSize="@dimen/x34"/>
 
     <TextView
         android:id="@+id/gaoqin_btn"
@@ -19,9 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/x160"
+        android:padding="@dimen/x10"
         android:text="@string/gq_str"
         android:textColor="@color/white"
-        android:textSize="@dimen/x24"/>
+        android:textSize="@dimen/x34"/>
 
     <TextView
         android:id="@+id/biaoqin_btn"
@@ -30,7 +32,8 @@
         android:layout_below="@id/gaoqin_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/x60"
+        android:padding="@dimen/x10"
         android:text="@string/bq_str"
         android:textColor="@color/white"
-        android:textSize="@dimen/x24"/>
+        android:textSize="@dimen/x34"/>
 </RelativeLayout>

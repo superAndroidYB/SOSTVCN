@@ -142,7 +142,7 @@ public class EpisodeActivity extends BaseActivity implements View.OnClickListene
                                     spinerView.setYearTextView(value);
                                     setGridViewDataByYear(value);
                                 }
-                            },getLayoutId());
+                            },getLayoutId(),true);
                         } else {
                             spinerView.setVisibility(View.GONE);
                             gridData = videoBaseListResponse.getResults();

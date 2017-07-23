@@ -19,7 +19,7 @@
         android:id="@+id/spinerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:textSize="@dimen/x20"
+        app:textSize="@dimen/x15"
         app:textColor="#282828"
         android:layout_gravity="center_horizontal"
         android:visibility="visible">

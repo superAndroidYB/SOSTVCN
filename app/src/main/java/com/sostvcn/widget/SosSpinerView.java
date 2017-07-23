@@ -36,6 +36,7 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
     private PopupWindow popupWindow;
     private OnSelectedClikcListener listener;
     private int layout;
+    private boolean isMatch;
 
     public SosSpinerView(Context context) {
         super(context);
@@ -56,11 +57,12 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
     }
 
 
-    public void setConfig(Activity activity, List<String> datas, OnSelectedClikcListener listener, int layout) {
+    public void setConfig(Activity activity, List<String> datas, OnSelectedClikcListener listener, int layout, boolean isMatch) {
         this.activity = activity;
         this.datas = datas;
         this.listener = listener;
         this.layout = layout;
+        this.isMatch = isMatch;
     }
 
     public void setYearTextView(String year) {
@@ -97,8 +99,11 @@ public class SosSpinerView extends RelativeLayout implements View.OnClickListene
         if (activity != null) {
             View popupWindowView = activity.getLayoutInflater().inflate(R.layout.spiner_popup_layout, null);
             if (popupWindow == null) {
-                //popupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                popupWindow = new PopupWindow(popupWindowView, (int) getResources().getDimension(R.dimen.x500), ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                if (isMatch) {
+                    popupWindow = new PopupWindow(popupWindowView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                } else {
+                    popupWindow = new PopupWindow(popupWindowView, (int) getResources().getDimension(R.dimen.x500), ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                }
                 popupWindow.setFocusable(true);
                 popupWindow.setOutsideTouchable(true);
                 ColorDrawable drawable = new ColorDrawable(85000000);

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,6 +19,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import com.sostvcn.model.SosDownloadBean;
 import com.sostvcn.service.DownloadService;
 import com.sostvcn.service.MusicService;
 import com.sostvcn.utils.Constants;
+import com.sostvcn.utils.ImageUtils;
 import com.sostvcn.utils.SPUtils;
 import com.sostvcn.utils.ServiceUtils;
 import com.sostvcn.utils.ToastUtils;
@@ -82,6 +85,8 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
     private ImageView player_next_btn;
     @ViewInject(R.id.player_list_btn)
     private ImageView player_list_btn;
+    @ViewInject(R.id.backgroud_view)
+    private RelativeLayout backgroudView;
 
     private int[] playWay = new int[]{R.drawable.audio_play_list_selector,
             R.drawable.audio_play_single_selector, R.drawable.audio_playlist_randow_selector};
@@ -107,6 +112,10 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         medias = (SosAudioList) getIntent().getSerializableExtra("medias");
         postion = getIntent().getIntExtra("postion", 0);
 
+        if (medias.getAlbum_cover() != null || !"".equals(medias.getAlbum_cover())) {
+            blurBackViewBlur();
+        }
+
         bitmapUtils = new BitmapUtils(this);
         bitmapUtils.configDiskCacheEnabled(true);
         bitmapUtils.configDefaultLoadingImage(R.mipmap.home_book_cover);//默认背景图片
@@ -131,6 +140,7 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         //如果音乐服务不在运行中就启动
         //如果在运行中就发送下标
         if (!ServiceUtils.isServiceRunning(AudioViewActivity.this, "com.sostvcn.service.MusicService")) {
+            ToastUtils.showShort(this,"no");
             MusicService.start(AudioViewActivity.this, medias, postion);
         }
         Intent broadcast = new Intent();
@@ -319,7 +329,29 @@ public class AudioViewActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private void actionShare(SHARE_MEDIA type){
+
+    public void blurBackViewBlur() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                //下面的这个方法必须在子线程中执行
+                final Bitmap blurBitmap2 = ImageUtils.GetUrlBitmap(medias.getAlbum_cover(), 10);
+
+                //刷新ui必须在主线程中执行
+                AudioViewActivity.this.runOnUiThread(new Runnable() {//这个是我自己封装的在主线程中刷新ui的方法。
+                    @Override
+                    public void run() {
+                        if (blurBitmap2 != null) {
+                            backgroudView.setBackgroundDrawable(new BitmapDrawable(blurBitmap2));
+                        }
+                    }
+                });
+            }
+        }).start();
+    }
+
+    private void actionShare(SHARE_MEDIA type) {
         popupWindow.dismiss();
         UMusic wxmusic = new UMusic(medias.getVoice_list().get(postion).getMp3());
         wxmusic.setTitle(medias.getVoice_list().get(postion).getTitle());//音乐的标题

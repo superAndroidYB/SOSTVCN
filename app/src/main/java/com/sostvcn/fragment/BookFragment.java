@@ -1,112 +1,58 @@
 package com.sostvcn.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sostvcn.R;
+import com.sostvcn.adapter.FragmentViewPagerAdapter;
+import com.sostvcn.gateway.base.BaseFragment;
+import com.sostvcn.model.SosAudioCatesInfo;
 import com.umeng.analytics.MobclickAgent;
 
+import java.util.List;
+
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BookFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BookFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * 书籍一级目录
  */
-public class BookFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class BookFragment extends BaseFragment {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    @ViewInject(R.id.toolbar_title)
+    private TextView toolbarTitle;
 
-    private OnFragmentInteractionListener mListener;
+    @ViewInject(R.id.toolbar)
+    private Toolbar toolbar;
 
-    public BookFragment() {
-        // Required empty public constructor
-    }
+    @ViewInject(R.id.sliding_tabs)
+    private TabLayout tabLayout;
+    @ViewInject(R.id.viewpager)
+    private ViewPager viewPager;
 
-    /**
-     * Use this factory method to create button_bg new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BookFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BookFragment newInstance(String param1, String param2) {
-        BookFragment fragment = new BookFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private List<Fragment> fragments;
+    private List<String> tabs;
+    private List<SosAudioCatesInfo> catesInfos;
+
+    private FragmentViewPagerAdapter viwePageAdapter;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_book;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    protected void onInitView(Bundle bundle) {
+        toolbarTitle.setText(R.string.rd_menu_book_title);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book, container, false);
+    protected void onEvent() {
+
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <button_bg href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</button_bg> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
     @Override
     public void onResume() {
@@ -119,4 +65,6 @@ public class BookFragment extends Fragment {
         super.onPause();
         MobclickAgent.onPageEnd("BookFragment");
     }
+
+
 }

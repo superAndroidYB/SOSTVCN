@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/default_dim"
-    tools:context="com.sostvcn.ui.AudioViewActivity">
+    tools:context="com.sostvcn.ui.AudioViewActivity" android:id="@+id/backgroud_view">
 
     <LinearLayout
         android:layout_width="match_parent"

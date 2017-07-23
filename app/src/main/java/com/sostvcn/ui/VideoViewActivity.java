@@ -557,7 +557,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
             public void onSelectedEvent(String value) {
                 qxdSelector.setYearTextView(value);
             }
-        }, getLayoutId());
+        }, getLayoutId(), false);
 
 
         api.loadAllVideo(id)
@@ -613,7 +613,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
                                     SostvCacheListAdapter adapter = new SostvCacheListAdapter(VideoViewActivity.this, map.get(value));
                                     cacheListView.setAdapter(adapter);
                                 }
-                            }, getLayoutId());
+                            }, getLayoutId(),false);
                         } else {
                             yearSelector.setVisibility(View.GONE);
                             SostvCacheListAdapter adapter = new SostvCacheListAdapter(VideoViewActivity.this, videoBaseListResponse.getResults());
