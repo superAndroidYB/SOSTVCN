@@ -28,4 +28,8 @@ public class NetWorkApi {
     public static final String loadAudioCatesInfo = "index.php/api/voice/catesinfo";
 
     public static final String loadAudioList = "index.php/api/voice/albuminfo";
+
+    public static String BASE_UR2 = "https://sos.link-z.cn/";
+
+    public static final String loadBookCates = "index.php/api/reading/catesinfo";
 }

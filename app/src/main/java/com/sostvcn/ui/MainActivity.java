@@ -1,6 +1,5 @@
 package com.sostvcn.ui;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,8 +17,7 @@ import com.sostvcn.fragment.UserFragment;
 import com.sostvcn.fragment.VideoFragment;
 import com.umeng.analytics.MobclickAgent;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,
-        BookFragment.OnFragmentInteractionListener,UserFragment.OnFragmentInteractionListener{
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
 
     @ViewInject(R.id.rd_group)
     private RadioGroup rpTab;
@@ -120,11 +118,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         if(fUser != null){
             transaction.hide(fUser);
         }
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     /**
