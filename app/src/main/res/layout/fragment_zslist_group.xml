@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/year_btn"
+        android:layout_width="@dimen/x300"
+        android:layout_height="@dimen/y60"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/zsyear_shape">
+
+        <TextView
+            android:id="@+id/year_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:drawableRight="@mipmap/read_zs_year_down"
+            android:gravity="center"
+            android:text="2014年"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/zs_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2">
+
+    </GridView>
+
+
+</LinearLayout>

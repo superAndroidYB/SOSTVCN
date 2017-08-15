@@ -1,7 +1,9 @@
 package com.sostvcn.fragment.book;
 
 import android.os.Bundle;
+import android.widget.ListView;
 
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sostvcn.R;
 import com.sostvcn.gateway.base.BaseFragment;
 import com.sostvcn.model.SosBookCates;
@@ -15,13 +17,16 @@ public class BookChildFragment extends BaseFragment {
     //是否是棕树期刊页面
     public boolean isZh = false;
 
+    @ViewInject(R.id.zs_listview)
+    private ListView zs_listview;
+
     public BookChildFragment(SosBookCates cates){
         this.cates = cates;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_zslist_content_item;
+        return R.layout.fragment_book_child_layout;
     }
 
     @Override
