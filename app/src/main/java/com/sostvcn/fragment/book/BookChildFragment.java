@@ -21,7 +21,7 @@ public class BookChildFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_book_child_layout;
+        return R.layout.fragment_zslist_content_item;
     }
 
     @Override

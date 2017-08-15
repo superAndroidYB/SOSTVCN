@@ -7,7 +7,6 @@ import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
 import com.sostvcn.model.SosCollectEntity;
 import com.sostvcn.utils.Constants;
-import com.sostvcn.utils.SDCardUtils;
 
 import java.util.Date;
 
@@ -24,7 +23,7 @@ public class CollectHelper {
 
     public CollectHelper(Context context) {
         this.context = context;
-        this.dbUtils = DbUtils.create(context, SDCardUtils.getSDCardRootDir() + "/SOSTVDB", "SOSTVDB");
+        this.dbUtils = DbUtils.create(context, "SOSTVDB");
     }
 
     public void saveCollect(SosCollectEntity entity) {
