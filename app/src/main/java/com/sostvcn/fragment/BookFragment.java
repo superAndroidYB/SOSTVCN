@@ -60,7 +60,7 @@ public class BookFragment extends BaseFragment {
     protected void onInitView(Bundle bundle) {
         toolbarTitle.setText(R.string.rd_menu_book_title);
 
-        api = HttpUtils.getInstance(this.getActivity()).getRetofitClinet().setBaseUrl(NetWorkApi.BASE_UR2).builder(BookPageApi.class);
+        api = HttpUtils.getInstance(this.getActivity()).getRetofitClinet().builder(BookPageApi.class);
         loadData();
     }
 
