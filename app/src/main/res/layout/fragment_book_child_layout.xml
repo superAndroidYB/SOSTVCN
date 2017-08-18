@@ -11,9 +11,21 @@
         android:groupIndicator="@null"
         android:paddingLeft="@dimen/x20"
         android:paddingRight="@dimen/x20"
+        android:visibility="gone"
         android:paddingTop="@dimen/x20">
-
     </ExpandableListView>
+
+
+    <GridView
+        android:layout_width="match_parent"
+        android:id="@+id/qt_gridview"
+        android:numColumns="3"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+        android:paddingTop="@dimen/x20">
+    </GridView>
 
 
 </LinearLayout>
