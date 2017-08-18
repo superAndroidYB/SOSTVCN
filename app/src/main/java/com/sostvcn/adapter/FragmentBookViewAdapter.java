@@ -2,9 +2,15 @@ package com.sostvcn.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.sostvcn.R;
@@ -15,7 +21,8 @@ import com.sostvcn.gateway.http.HttpUtils;
 import com.sostvcn.model.BaseListResponse;
 import com.sostvcn.model.SosBookCates;
 import com.sostvcn.model.SosBookItems;
-import com.sostvcn.model.SosPalms;
+import com.sostvcn.model.SosMagazines;
+import com.sostvcn.widget.SostvGridView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +39,7 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private SosBookCates cates;
-    private Map<Integer,List<SosPalms>> childList;
+    private Map<Integer,List<SosMagazines>> childList;
     private BitmapUtils bitmapUtils;
     public FragmentBookViewAdapter(Context context, SosBookCates cates){
         this.context = context;
@@ -51,13 +58,13 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
         BookPageApi api = HttpUtils.getInstance(this.context).getRetofitClinet().builder(BookPageApi.class);
 
         for (SosBookItems item : cates.getSubCates()) {
-            final List<SosPalms> list = new ArrayList<>();
-            api.loadPalms(item.getCate_id()).subscribeOn(Schedulers.io())
+            final List<SosMagazines> list = new ArrayList<>();
+            api.loadMagazines(item.getCate_id()).subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new ProgressSubscriber<BaseListResponse<SosPalms>>(new SubscriberOnNextListener<BaseListResponse<SosPalms>>() {
+                    .subscribe(new ProgressSubscriber<BaseListResponse<SosMagazines>>(new SubscriberOnNextListener<BaseListResponse<SosMagazines>>() {
                         @Override
-                        public void onNext(BaseListResponse<SosPalms> sosPalmsBaseListResponse) {
+                        public void onNext(BaseListResponse<SosMagazines> sosPalmsBaseListResponse) {
                             list.addAll(sosPalmsBaseListResponse.getResults());
                         }
                     },context));
@@ -77,22 +84,22 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int i) {
-        return null;
+        return cates.getSubCates().get(i);
     }
 
     @Override
     public Object getChild(int i, int i1) {
-        return null;
+        return childList.get(cates.getSubCates().get(i).getCate_id()).get(i1);
     }
 
     @Override
     public long getGroupId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
     public long getChildId(int i, int i1) {
-        return 0;
+        return i1;
     }
 
     @Override
@@ -102,12 +109,56 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+        if(view == null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.fragment_zslist_group,null);
+        }
+        RelativeLayout year_btn = (RelativeLayout)view.findViewById(R.id.year_btn);
+        TextView year_btn_text = (TextView)view.findViewById(R.id.year_btn_text);
+        year_btn_text.setText(cates.getSubCates().get(i).getCate_title());
+        return view;
     }
 
     @Override
-    public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+    public View getChildView(final int i, final int i1, boolean b, View view, ViewGroup viewGroup) {
+        if(view == null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.fragment_zslist_item,null);
+        }
+        SostvGridView zs_grid = (SostvGridView)view.findViewById(R.id.zs_grid);
+        zs_grid.setAdapter(new BaseAdapter() {
+
+            @Override
+            public int getCount() {
+                return childList.get(cates.getSubCates().get(i).getCate_id()).size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return childList.get(cates.getSubCates().get(i).getCate_id()).get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if(convertView == null){
+                    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    convertView = inflater.inflate(R.layout.fragment_zsgrid_item,null);
+                }
+                ImageView zs_grid_image = (ImageView) convertView.findViewById(R.id.zs_grid_image);
+                TextView zs_grid_title = (TextView) convertView.findViewById(R.id.zs_grid_title);
+
+                SosMagazines magazines = childList.get(cates.getSubCates().get(i).getCate_id()).get(position);
+                bitmapUtils.display(zs_grid_image, magazines.getCover_image());
+                zs_grid_title.setText(magazines.getCate_title());
+                return convertView;
+            }
+        });
+        return view;
     }
 
     @Override

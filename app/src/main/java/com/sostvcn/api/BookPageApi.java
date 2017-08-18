@@ -2,8 +2,7 @@ package com.sostvcn.api;
 
 import com.sostvcn.model.BaseListResponse;
 import com.sostvcn.model.SosBookCates;
-import com.sostvcn.model.SosPalms;
-import com.sostvcn.utils.NetworkUtil;
+import com.sostvcn.model.SosMagazines;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -18,6 +17,6 @@ public interface BookPageApi {
     @GET(NetWorkApi.loadBookCates)
     Observable<BaseListResponse<SosBookCates>> loadCatesinfo();
 
-    @GET(NetWorkApi.loadPalmList)
-    Observable<BaseListResponse<SosPalms>> loadPalms(@Query("cate_id") int cate_id);
+    @GET(NetWorkApi.loadMagazines)
+    Observable<BaseListResponse<SosMagazines>> loadMagazines(@Query("cate_id") int cate_id);
 }

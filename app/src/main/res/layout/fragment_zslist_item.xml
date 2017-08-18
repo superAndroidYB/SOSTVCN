@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridView
+    <com.sostvcn.widget.SostvGridView
         android:id="@+id/zs_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2">
 
-    </GridView>
+    </com.sostvcn.widget.SostvGridView>
 
 </LinearLayout>

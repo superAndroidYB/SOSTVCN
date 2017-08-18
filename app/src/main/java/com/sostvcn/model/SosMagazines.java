@@ -4,7 +4,7 @@ package com.sostvcn.model;
  * Created by ldei on 2017/8/17.
  */
 
-public class SosPalms {
+public class SosMagazines {
 
     private int cate_id;
     private String cate_title;
