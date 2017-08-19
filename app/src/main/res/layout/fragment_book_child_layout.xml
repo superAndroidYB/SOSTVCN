@@ -8,23 +8,27 @@
         android:id="@+id/zs_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="@dimen/x20"
         android:groupIndicator="@null"
         android:paddingLeft="@dimen/x20"
         android:paddingRight="@dimen/x20"
-        android:visibility="gone"
-        android:paddingTop="@dimen/x20">
+        android:paddingTop="@dimen/x20"
+        android:visibility="gone">
     </ExpandableListView>
 
 
     <GridView
-        android:layout_width="match_parent"
         android:id="@+id/qt_gridview"
-        android:numColumns="3"
-        android:visibility="gone"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:horizontalSpacing="@dimen/x10"
+        android:numColumns="3"
         android:paddingLeft="@dimen/x20"
         android:paddingRight="@dimen/x20"
-        android:paddingTop="@dimen/x20">
+        android:paddingTop="@dimen/x20"
+        android:verticalSpacing="@dimen/y10"
+        android:visibility="gone">
     </GridView>
 
 

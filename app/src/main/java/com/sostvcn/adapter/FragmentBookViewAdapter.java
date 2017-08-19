@@ -7,30 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.sostvcn.R;
-import com.sostvcn.api.BookPageApi;
-import com.sostvcn.gateway.callback.ProgressSubscriber;
-import com.sostvcn.gateway.callback.SubscriberOnNextListener;
-import com.sostvcn.gateway.http.HttpUtils;
-import com.sostvcn.model.BaseListResponse;
 import com.sostvcn.model.SosBookCates;
-import com.sostvcn.model.SosBookItems;
 import com.sostvcn.model.SosMagazines;
 import com.sostvcn.widget.SostvGridView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/8/15.
@@ -41,9 +29,10 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
     private SosBookCates cates;
     private Map<Integer,List<SosMagazines>> childList;
     private BitmapUtils bitmapUtils;
-    public FragmentBookViewAdapter(Context context, SosBookCates cates){
+    public FragmentBookViewAdapter(Context context, SosBookCates cates, Map<Integer,List<SosMagazines>> childList){
         this.context = context;
         this.cates = cates;
+        this.childList = childList;
 
         bitmapUtils = new BitmapUtils(context);
         bitmapUtils.configDiskCacheEnabled(true);
@@ -52,25 +41,6 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
         bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);
     }
 
-
-    private void loadPalms(){
-        childList = new HashMap<>();
-        BookPageApi api = HttpUtils.getInstance(this.context).getRetofitClinet().builder(BookPageApi.class);
-
-        for (SosBookItems item : cates.getSubCates()) {
-            final List<SosMagazines> list = new ArrayList<>();
-            api.loadMagazines(item.getCate_id()).subscribeOn(Schedulers.io())
-                    .unsubscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new ProgressSubscriber<BaseListResponse<SosMagazines>>(new SubscriberOnNextListener<BaseListResponse<SosMagazines>>() {
-                        @Override
-                        public void onNext(BaseListResponse<SosMagazines> sosPalmsBaseListResponse) {
-                            list.addAll(sosPalmsBaseListResponse.getResults());
-                        }
-                    },context));
-            childList.put(item.getCate_id(), list);
-        }
-    }
 
     @Override
     public int getGroupCount() {

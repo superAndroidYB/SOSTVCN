@@ -11,7 +11,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sostvcn.R;
 import com.sostvcn.adapter.FragmentViewPagerAdapter;
 import com.sostvcn.api.BookPageApi;
-import com.sostvcn.api.NetWorkApi;
 import com.sostvcn.fragment.book.BookChildFragment;
 import com.sostvcn.gateway.base.BaseFragment;
 import com.sostvcn.gateway.callback.ProgressSubscriber;
