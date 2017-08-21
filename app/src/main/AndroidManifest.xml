@@ -108,6 +108,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name=".ui.MultiselectActivity">
         </activity>
+        <activity android:name=".ui.PalmDetailActivity">
+        </activity>
     </application>
 
 </manifest>
