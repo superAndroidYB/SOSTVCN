@@ -43,5 +43,6 @@
     <string name="szxqStr">书籍详情</string>
     <string name="jianjieStr">简介</string>
     <string name="ksydStr">开始阅读</string>
+    <string name="catalogueStr">目录</string>
 
 </resources>

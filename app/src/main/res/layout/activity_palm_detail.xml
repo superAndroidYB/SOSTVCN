@@ -120,21 +120,35 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/x28"
                     android:layout_weight="1"
-                    android:background="@mipmap/read_details_collection_sel"/>
+                    android:drawableTop="@mipmap/read_details_collection_sel"
+                    android:gravity="center"
+                    android:text="@string/audio_title2"
+                    android:textColor="#646464"
+                    android:textSize="@dimen/x26"/>
 
-                <ImageView
+                <TextView
+                    android:id="@+id/book_share_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/x28"
                     android:layout_weight="1"
-                    android:background="@mipmap/read_details_collection_sel"/>
+                    android:drawableTop="@mipmap/read_details_share"
+                    android:gravity="center"
+                    android:text="@string/audio_title3"
+                    android:textColor="#646464"
+                    android:textSize="@dimen/x26"/>
 
-                <ImageView
+                <TextView
+                    android:id="@+id/book_catalogue_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/x28"
                     android:layout_weight="1"
-                    android:background="@mipmap/read_details_collection_sel"/>
+                    android:drawableTop="@mipmap/read_details_catalog"
+                    android:gravity="center"
+                    android:text="@string/catalogueStr"
+                    android:textColor="#646464"
+                    android:textSize="@dimen/x26"/>
 
             </LinearLayout>
 

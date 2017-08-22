@@ -1,10 +1,12 @@
 package com.sostvcn.model;
 
+import java.io.Serializable;
+
 /**
  * Created by ldei on 2017/8/17.
  */
 
-public class SosMagazines {
+public class SosMagazines implements Serializable{
 
     private int cate_id;
     private String cate_title;

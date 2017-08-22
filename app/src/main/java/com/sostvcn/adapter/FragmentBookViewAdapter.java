@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import com.lidroid.xutils.BitmapUtils;
 import com.sostvcn.R;
 import com.sostvcn.model.SosBookCates;
 import com.sostvcn.model.SosMagazines;
+import com.sostvcn.ui.PalmDetailActivity;
 import com.sostvcn.widget.SostvGridView;
 
 import java.util.List;
@@ -27,9 +29,10 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private SosBookCates cates;
-    private Map<Integer,List<SosMagazines>> childList;
+    private Map<Integer, List<SosMagazines>> childList;
     private BitmapUtils bitmapUtils;
-    public FragmentBookViewAdapter(Context context, SosBookCates cates, Map<Integer,List<SosMagazines>> childList){
+
+    public FragmentBookViewAdapter(Context context, SosBookCates cates, Map<Integer, List<SosMagazines>> childList) {
         this.context = context;
         this.cates = cates;
         this.childList = childList;
@@ -79,23 +82,30 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        if(view == null){
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.fragment_zslist_group,null);
+            view = inflater.inflate(R.layout.fragment_zslist_group, null);
         }
-        RelativeLayout year_btn = (RelativeLayout)view.findViewById(R.id.year_btn);
-        TextView year_btn_text = (TextView)view.findViewById(R.id.year_btn_text);
+        RelativeLayout year_btn = (RelativeLayout) view.findViewById(R.id.year_btn);
+        TextView year_btn_text = (TextView) view.findViewById(R.id.year_btn_text);
         year_btn_text.setText(cates.getSubCates().get(i).getCate_title());
         return view;
     }
 
     @Override
     public View getChildView(final int i, final int i1, boolean b, View view, ViewGroup viewGroup) {
-        if(view == null){
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.fragment_zslist_item,null);
+            view = inflater.inflate(R.layout.fragment_zslist_item, null);
         }
-        SostvGridView zs_grid = (SostvGridView)view.findViewById(R.id.zs_grid);
+        SostvGridView zs_grid = (SostvGridView) view.findViewById(R.id.zs_grid);
+        zs_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                SosMagazines magazines = childList.get(cates.getSubCates().get(i).getCate_id()).get(position);
+                PalmDetailActivity.start(context, magazines);
+            }
+        });
         zs_grid.setAdapter(new BaseAdapter() {
 
             @Override
@@ -115,9 +125,9 @@ public class FragmentBookViewAdapter extends BaseExpandableListAdapter {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                if(convertView == null){
+                if (convertView == null) {
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    convertView = inflater.inflate(R.layout.fragment_zsgrid_item,null);
+                    convertView = inflater.inflate(R.layout.fragment_zsgrid_item, null);
                 }
                 ImageView zs_grid_image = (ImageView) convertView.findViewById(R.id.zs_grid_image);
                 TextView zs_grid_title = (TextView) convertView.findViewById(R.id.zs_grid_title);
