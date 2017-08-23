@@ -110,6 +110,8 @@
         </activity>
         <activity android:name=".ui.PalmDetailActivity">
         </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".ui.BookDetailActivity"></activity>
     </application>
 
 </manifest>
