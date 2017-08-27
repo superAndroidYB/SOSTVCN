@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
@@ -23,6 +24,7 @@ import com.sostvcn.model.BaseListResponse;
 import com.sostvcn.model.SosBookCates;
 import com.sostvcn.model.SosBookItems;
 import com.sostvcn.model.SosMagazines;
+import com.sostvcn.ui.BookDetailActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +57,8 @@ public class BookChildFragment extends BaseFragment {
     private BookPageApi api;
     private BitmapUtils bitmapUtils;
 
+    private Context context;
+
     public BookChildFragment(SosBookCates cates) {
         this.cates = cates;
         if ("棕树期刊".equals(cates.getCate_title())) {
@@ -74,7 +78,7 @@ public class BookChildFragment extends BaseFragment {
         bitmapUtils.configDefaultLoadingImage(R.mipmap.home_book_cover);//默认背景图片
         bitmapUtils.configDefaultLoadFailedImage(R.mipmap.home_book_cover);//加载失败图片
         bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);
-
+        context = this.getActivity();
         api = HttpUtils.getInstance(this.getActivity()).getRetofitClinet().builder(BookPageApi.class);
         if (isZh) {
             zs_listview.setVisibility(View.VISIBLE);
@@ -115,6 +119,14 @@ public class BookChildFragment extends BaseFragment {
                     bitmapUtils.display(qtsj_item_image, cates.getSubCates().get(i).getCate_image());
                     qtsj_item_text.setText(cates.getSubCates().get(i).getCate_title());
                     return view;
+                }
+            });
+
+            qt_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    SosBookItems item = cates.getSubCates().get(i);
+                    BookDetailActivity.start(context, item);
                 }
             });
         }

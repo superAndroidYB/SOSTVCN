@@ -1,10 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.sostvcn.ui.BookDetailActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y88">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x30"
+            android:padding="@dimen/x20"
+            android:src="@mipmap/read_text_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/szxqStr"
+            android:textColor="@color/black"
+            android:textSize="@dimen/x36" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y10"
+        android:background="@color/qianhui" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y434">
+
+                <ImageView
+                    android:id="@+id/book_image"
+                    android:layout_width="@dimen/x230"
+                    android:layout_height="@dimen/y344"
+                    android:layout_marginLeft="22dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="22dp" />
+
+                <TextView
+                    android:id="@+id/book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginTop="@dimen/y85"
+                    android:layout_toRightOf="@id/book_image"
+                    android:textColor="#282828"
+                    android:textSize="@dimen/x38" />
+
+                <TextView
+                    android:id="@+id/book_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/book_title"
+                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginTop="@dimen/y40"
+                    android:layout_toRightOf="@id/book_image"
+                    android:textColor="#282828"
+                    android:textSize="@dimen/x34" />
+
+                <TextView
+                    android:id="@+id/book_collect_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/book_image"
+                    android:layout_toEndOf="@+id/book_desc"
+                    android:layout_toRightOf="@+id/book_desc"
+                    android:drawableLeft="@mipmap/read_details_collection"
+                    android:drawablePadding="@dimen/x15"
+                    android:gravity="center"
+                    android:text="@string/audio_title2"
+                    android:textColor="#646464" />
+
+                <TextView
+                    android:id="@+id/book_share_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/book_collect_btn"
+                    android:layout_alignBottom="@+id/book_collect_btn"
+                    android:layout_marginLeft="@dimen/x85"
+                    android:layout_toEndOf="@+id/book_collect_btn"
+                    android:layout_toRightOf="@+id/book_collect_btn"
+                    android:drawableLeft="@mipmap/read_details_share"
+                    android:drawablePadding="@dimen/x15"
+                    android:gravity="center"
+                    android:text="@string/audio_title3"
+                    android:textColor="#646464" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/qianhui"
+                android:layout_height="@dimen/y80">
+                <TextView
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="目录" />
+            </LinearLayout>
+
+
+            <com.sostvcn.widget.SostvListView
+                android:id="@+id/book_catalogue_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/qianhui">
+
+            </com.sostvcn.widget.SostvListView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

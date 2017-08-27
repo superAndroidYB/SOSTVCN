@@ -34,7 +34,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/y10"
-        android:background="@color/default_seach_color"/>
+        android:background="@color/qianhui"/>
 
     <!-- <RelativeLayout
         android:layout_width="match_parent"

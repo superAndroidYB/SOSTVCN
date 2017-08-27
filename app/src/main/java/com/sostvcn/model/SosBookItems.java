@@ -1,9 +1,11 @@
 package com.sostvcn.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/7/23.
  */
-public class SosBookItems {
+public class SosBookItems implements Serializable{
 
     private int cate_id;
 
