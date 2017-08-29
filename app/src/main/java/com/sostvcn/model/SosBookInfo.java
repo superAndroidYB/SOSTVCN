@@ -53,7 +53,7 @@ public class SosBookInfo {
         return hits;
     }
 
-    class BookContent {
+    public class BookContent {
         private int content_id;
         private String title;
         private int cate_id;

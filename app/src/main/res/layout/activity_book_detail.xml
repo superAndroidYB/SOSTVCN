@@ -55,10 +55,10 @@
                     android:id="@+id/book_image"
                     android:layout_width="@dimen/x230"
                     android:layout_height="@dimen/y344"
-                    android:layout_marginLeft="22dp"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
                     android:layout_marginStart="22dp" />
 
                 <TextView
@@ -113,28 +113,46 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@color/qianhui"
-                android:layout_height="@dimen/y80">
+                android:layout_height="@dimen/y80"
+                android:background="@color/qianhui">
+
                 <TextView
-                    android:layout_marginLeft="@dimen/x30"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x30"
                     android:gravity="center_vertical"
                     android:text="目录" />
             </LinearLayout>
 
-
-            <com.sostvcn.widget.SostvListView
-                android:id="@+id/book_catalogue_lv"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/qianhui">
 
-            </com.sostvcn.widget.SostvListView>
+                <com.sostvcn.widget.SostvListView
+                    android:id="@+id/book_catal_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></com.sostvcn.widget.SostvListView>
+            </LinearLayout>
+
 
         </LinearLayout>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:background="#1E82D2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ksydStr"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x40" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>

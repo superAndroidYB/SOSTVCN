@@ -1,6 +1,7 @@
 package com.sostvcn.api;
 
 import com.sostvcn.model.BaseListResponse;
+import com.sostvcn.model.BaseObjectResponse;
 import com.sostvcn.model.SosBookCates;
 import com.sostvcn.model.SosBookInfo;
 import com.sostvcn.model.SosMagazines;
@@ -22,5 +23,5 @@ public interface BookPageApi {
     Observable<BaseListResponse<SosMagazines>> loadMagazines(@Query("cate_id") int cate_id);
 
     @GET(NetWorkApi.loadBookInfo)
-    Observable<BaseListResponse<SosBookInfo>> loadBookInfo(@Query("cate_id") int cate_id);
+    Observable<BaseObjectResponse<SosBookInfo>> loadBookInfo(@Query("cate_id") int cate_id);
 }
