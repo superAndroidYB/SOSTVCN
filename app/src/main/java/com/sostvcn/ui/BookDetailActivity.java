@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import java.util.List;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class BookDetailActivity extends BaseActivity {
+public class BookDetailActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     @ViewInject(R.id.back_btn)
     private ImageView back_btn;
@@ -64,7 +65,7 @@ public class BookDetailActivity extends BaseActivity {
     @Override
     protected void onInitView(Bundle bundle) {
         item = (SosBookItems) getIntent().getSerializableExtra("item");
-        adapter = new CatalogueAdapter();
+        info = new SosBookInfo();
 
         bitmapUtils = new BitmapUtils(this);
         bitmapUtils.configDiskCacheEnabled(true);
@@ -76,8 +77,10 @@ public class BookDetailActivity extends BaseActivity {
         if (item != null) {
             bitmapUtils.display(book_image, item.getCate_image());
             book_title.setText(item.getCate_title());
-            book_catal_lv.setAdapter(adapter);
+            //book_desc.setText(item.getAlias());
             loadBookCatalogue(item.getCate_id());
+
+            book_catal_lv.setOnItemClickListener(this);
         }
     }
 
@@ -90,9 +93,16 @@ public class BookDetailActivity extends BaseActivity {
                     @Override
                     public void onNext(BaseObjectResponse<SosBookInfo> sosBookInfoBaseListResponse) {
                         info = sosBookInfoBaseListResponse.getResults();
-                        adapter.notifyDataSetChanged();
+                        adapter = new CatalogueAdapter();
+                        book_catal_lv.setAdapter(adapter);
                     }
                 }, this));
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        SosBookInfo.BookContent content = info.getContents().get(i);
+        BookContentActivity.start(this, content.getContent_id());
     }
 
     class CatalogueAdapter extends BaseAdapter {
@@ -119,7 +129,7 @@ public class BookDetailActivity extends BaseActivity {
                 convertView = inflater.inflate(R.layout.book_catalogue_list_item, null);
             }
             SosBookInfo.BookContent item = info.getContents().get(position);
-            if(item != null){
+            if (item != null) {
                 TextView title = (TextView) convertView.findViewById(R.id.book_cata_title);
                 title.setText(item.getTitle());
             }

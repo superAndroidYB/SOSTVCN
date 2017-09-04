@@ -34,4 +34,6 @@ public class NetWorkApi {
     public static final String loadMagazines = "index.php/api/reading/magazines";
 
     public static final String loadBookInfo = "index.php/api/reading/bookinfo";
+
+    public static final String loadBookContent = "index.php/api/reading/bookcontent";
 }
