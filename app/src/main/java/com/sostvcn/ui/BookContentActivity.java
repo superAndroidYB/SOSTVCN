@@ -17,6 +17,12 @@ import com.sostvcn.model.BaseObjectResponse;
 import com.sostvcn.model.SosBookContent;
 import com.umeng.socialize.media.Base;
 
+import org.htmlparser.Node;
+import org.htmlparser.NodeFilter;
+import org.htmlparser.Parser;
+import org.htmlparser.util.NodeList;
+import org.htmlparser.util.ParserException;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -43,11 +49,28 @@ public class BookContentActivity extends BaseActivity {
         api.loadBookContent(contentId).subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ProgressSubscriber<BaseListResponse<SosBookContent>>(new SubscriberOnNextListener<BaseListResponse<SosBookContent>>() {
+                .subscribe(new ProgressSubscriber<BaseObjectResponse<SosBookContent>>(new SubscriberOnNextListener<BaseObjectResponse<SosBookContent>>() {
                     @Override
-                    public void onNext(BaseListResponse<SosBookContent> sosBookContentBaseObjectResponse) {
-                        //content = sosBookContentBaseObjectResponse.getResults().get(0);
-                        textaaaa.setText(contentId+s);
+                    public void onNext(BaseObjectResponse<SosBookContent> sosBookContentBaseObjectResponse) {
+                        content = sosBookContentBaseObjectResponse.getResults();
+                        try {
+                            Parser parser = new Parser(content.getContent_text());
+                            NodeList nodeList = parser.parse(new NodeFilter() {
+                                @Override
+                                public boolean accept(Node node) {
+                                    return true;
+                                }
+                            });
+
+                            StringBuffer sb = new StringBuffer();
+                            for (Node node : nodeList.toNodeArray()) {
+                                sb.append(node.getText());
+                            }
+                            textaaaa.setText(sb.toString());
+
+                        } catch (ParserException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, this));
     }

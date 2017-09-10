@@ -27,6 +27,6 @@ public interface BookPageApi {
     Observable<BaseObjectResponse<SosBookInfo>> loadBookInfo(@Query("cate_id") int cate_id);
 
     @GET(NetWorkApi.loadBookContent)
-    Observable<BaseListResponse<SosBookContent>> loadBookContent(@Query("cate_id") int content_id);
+    Observable<BaseObjectResponse<SosBookContent>> loadBookContent(@Query("content_id") int content_id);
 
 }
