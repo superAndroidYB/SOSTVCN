@@ -82,6 +82,13 @@ public class BookDetailActivity extends BaseActivity implements AdapterView.OnIt
 
             book_catal_lv.setOnItemClickListener(this);
         }
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void loadBookCatalogue(int cateId) {
