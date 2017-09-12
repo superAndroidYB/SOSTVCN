@@ -32,7 +32,7 @@ public class BookPageFactory {
 
     private Vector<String> m_lines = new Vector<String>();
 
-    private int m_fontSize = 24;
+    private int m_fontSize = 44;
     private int m_textColor = Color.BLACK;
     private int m_backColor = 0xffff9e85; // 背景颜色
     private int marginWidth = 15; // 左右与边缘的距离
@@ -44,6 +44,7 @@ public class BookPageFactory {
     private boolean m_isfirstPage,m_islastPage;
 
     private Paint mPaint;
+
 
 
     public BookPageFactory(int w, int h) {
@@ -233,7 +234,6 @@ public class BookPageFactory {
                 m_mbBufBegin += lines.get(0).getBytes(m_strCharsetName).length;
                 lines.remove(0);
             } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

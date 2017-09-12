@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.sostvcn.ui.BookContentActivity">
 
-    <TextView
-        android:id="@+id/textaaaa"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/book_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -72,7 +72,7 @@ public class SostvBookView extends View {
     Scroller mScroller;
 
 
-    public SostvBookView(Context context) {
+    public SostvBookView(Context context,int mWidth,int mHeight) {
         super(context);
         mPath0 = new Path();
         mPath1 = new Path();
@@ -91,6 +91,8 @@ public class SostvBookView extends View {
 
         mTouch.x = 0.01f; // 不让x,y为0,否则在点计算时会有问题
         mTouch.y = 0.01f;
+        this.mWidth = mWidth;
+        this.mHeight = mHeight;
     }
 
     /**
