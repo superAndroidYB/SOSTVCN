@@ -374,7 +374,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
         share_alipay_btn.setOnClickListener(this);
         share_copy_link_btn.setOnClickListener(this);
 
-        popupWindow.showAtLocation(getLayoutInflater().inflate(R.layout.activity_small_video_view, null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        popupWindow.showAtLocation(getLayoutInflater().inflate(getLayoutId(), null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
     /**
@@ -397,7 +397,7 @@ public class VideoViewActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
-        popupWindow.showAtLocation(getLayoutInflater().inflate(R.layout.activity_small_video_view, null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        popupWindow.showAtLocation(getLayoutInflater().inflate(getLayoutId(), null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         final TextView hd = (TextView) popupWindowView.findViewById(R.id.download_hd);
         TextView sd = (TextView) popupWindowView.findViewById(R.id.download_sd);
         hd.setOnClickListener(this);

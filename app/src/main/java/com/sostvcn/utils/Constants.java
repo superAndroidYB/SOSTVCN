@@ -10,6 +10,7 @@ public class Constants {
 
     public static final String TYPE_VIDEO = "VIDEO";
     public static final String TYPE_AUDIO = "AUDIO";
+    public static final String TYPE_BOOK = "BOOK";
 
     public static final String ACTION_PLAY = "ACTION_PLAY";
     public static final String ACTION_PAUSE = "ACTION_PAUSE";

@@ -53,15 +53,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y434">
 
-                <ImageView
+                <com.yinglan.shadowimageview.ShadowImageView
                     android:id="@+id/book_image"
                     android:layout_width="@dimen/x230"
                     android:layout_height="@dimen/y344"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    app:shadowRound="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x34" />
 
                 <TextView
                     android:id="@+id/book_title"
@@ -152,6 +152,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/start_read_btn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y96"
         android:layout_alignParentBottom="true"
