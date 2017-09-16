@@ -61,7 +61,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     app:shadowRound="@dimen/y20"
-                    android:layout_marginLeft="@dimen/x34" />
+                    android:layout_marginLeft="@dimen/x50" />
 
                 <TextView
                     android:id="@+id/book_title"
@@ -95,7 +95,7 @@
                     android:drawablePadding="@dimen/x15"
                     android:gravity="center"
                     android:text="@string/audio_title2"
-                    android:textColor="#646464" />
+                    android:textColor="@drawable/book_btn_txet_selector" />
 
                 <TextView
                     android:id="@+id/book_share_btn"
@@ -110,7 +110,7 @@
                     android:drawablePadding="@dimen/x15"
                     android:gravity="center"
                     android:text="@string/audio_title3"
-                    android:textColor="#646464" />
+                    android:textColor="@drawable/book_btn_txet_selector" />
             </RelativeLayout>
 
         </LinearLayout>

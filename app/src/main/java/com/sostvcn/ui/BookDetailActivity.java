@@ -4,6 +4,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.sostvcn.model.SosBookItems;
 import com.sostvcn.model.SosCollectEntity;
 import com.sostvcn.model.SosMagazines;
 import com.sostvcn.utils.Constants;
+import com.sostvcn.utils.ToastUtils;
 import com.sostvcn.widget.SostvListView;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -44,6 +46,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
 import com.umeng.socialize.media.UMWeb;
+import com.yinglan.shadowimageview.ShadowImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +59,7 @@ public class BookDetailActivity extends BaseActivity implements View.OnClickList
     @ViewInject(R.id.back_btn)
     private ImageView back_btn;
     @ViewInject(R.id.book_image)
-    private ImageView book_image;
+    private ShadowImageView book_image;
     @ViewInject(R.id.book_title)
     private TextView book_title;
     @ViewInject(R.id.book_desc)
@@ -100,8 +103,8 @@ public class BookDetailActivity extends BaseActivity implements View.OnClickList
 
         if (item != null) {
             bitmapUtils.display(book_image, item.getCate_image());
-            book_title.setText(info.getBook_title());
-            book_desc.setText(item.getCate_title());
+            book_title.setText(item.getCate_title());
+            //book_desc.setText(item.getCate_title());
             loadBookCatalogue(item.getCate_id());
 
             book_catal_lv.setOnItemClickListener(this);
@@ -111,32 +114,38 @@ public class BookDetailActivity extends BaseActivity implements View.OnClickList
         book_collect_btn.setOnClickListener(this);
         book_share_btn.setOnClickListener(this);
         start_read_btn.setOnClickListener(this);
-
-        collectEntity = collectHelper.findCollect(info.getBook_id());
-        showCollectStyle();
     }
 
     private void actionCollectBook() {
         if (collectEntity == null) {
             collectEntity = new SosCollectEntity();
-            collectEntity.setId(info.getBook_id());
+            collectEntity.setObjId(info.getBook_id());
             collectEntity.setObjName(info.getBook_title());
             collectEntity.setObjDesc(info.getBook_title());
             collectEntity.setObjImage(info.getBook_cover());
             collectEntity.setType(Constants.TYPE_BOOK);
             collectHelper.saveCollect(collectEntity);
+            ToastUtils.showCenter(this,"您已成功收藏！");
         } else {
             collectHelper.deleteCollect(collectEntity);
             collectEntity = null;
+            ToastUtils.showCenter(this,"您已取消收藏！");
         }
         showCollectStyle();
     }
 
     private void showCollectStyle() {
         if (collectEntity == null) {
-            book_collect_btn.setCompoundDrawables(null, getResources().getDrawable(R.mipmap.read_details_collection), null, null);
+            Drawable drawable = getResources().getDrawable(R.mipmap.read_details_collection);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            book_collect_btn.setCompoundDrawables(drawable, null, null, null);
+            book_collect_btn.setText(R.string.audio_title2);
         } else {
-            book_collect_btn.setCompoundDrawables(null, getResources().getDrawable(R.mipmap.read_details_collection_sel), null, null);
+            Drawable drawable = getResources().getDrawable(R.mipmap.read_details_collection_sel);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            book_collect_btn.setCompoundDrawables(drawable, null, null, null);
+            book_collect_btn.setText(R.string.audio_title2_2);
+
         }
     }
 
@@ -151,6 +160,9 @@ public class BookDetailActivity extends BaseActivity implements View.OnClickList
                         info = sosBookInfoBaseListResponse.getResults();
                         adapter = new CatalogueAdapter();
                         book_catal_lv.setAdapter(adapter);
+
+                        collectEntity = collectHelper.findCollect(info.getBook_id());
+                        showCollectStyle();
                     }
                 }, this));
     }

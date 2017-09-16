@@ -44,5 +44,9 @@
     <string name="jianjieStr">简介</string>
     <string name="ksydStr">开始阅读</string>
     <string name="catalogueStr">目录</string>
+    <string name="jdStr">进度</string>
+    <string name="settingStr">设置</string>
+    <string name="nightStr">夜间</string>
+    <string name="btStr">白天</string>
 
 </resources>

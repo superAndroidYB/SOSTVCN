@@ -1,6 +1,7 @@
 package com.sostvcn.utils;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.widget.Toast;
 
 /**
@@ -88,5 +89,20 @@ public class ToastUtils {
     {
         if (isShow)
             Toast.makeText(context, message, duration).show();
+    }
+
+    /**
+     * 居中显示
+     *
+     * @param context
+     * @param message
+     */
+    public static void showCenter(Context context, String message)
+    {
+        if (isShow){
+            Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
 }
