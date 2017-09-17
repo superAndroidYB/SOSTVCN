@@ -6,7 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.sostvcn.ui.BookContentActivity">
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/book_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <RelativeLayout
+        android:id="@+id/topToolBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y84"
         android:layout_alignParentTop="true"
@@ -49,16 +55,8 @@
             android:background="@color/black" />
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/book_view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
-
-
     <RelativeLayout
+        android:id="@+id/bottomToolBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y104"
         android:layout_alignParentBottom="true"
@@ -84,8 +82,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/catalogueStr"
-                android:textColor="@color/popbg"
-                android:textSize="@dimen/x20" />
+                android:textColor="@drawable/book_menubtn_txet_selector"
+                android:textSize="@dimen/x25" />
 
             <TextView
                 android:id="@+id/process_view"
@@ -94,8 +92,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/jdStr"
-                android:textColor="@color/popbg"
-                android:textSize="@dimen/x20" />
+                android:textColor="#7F7F7F"
+                android:textSize="@dimen/x25" />
 
             <TextView
                 android:id="@+id/setting_view"
@@ -104,8 +102,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/settingStr"
-                android:textColor="@color/popbg"
-                android:textSize="@dimen/x20" />
+                android:textColor="@drawable/book_menubtn_txet_selector"
+                android:textSize="@dimen/x25" />
 
             <TextView
                 android:id="@+id/model_view"
@@ -114,8 +112,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/nightStr"
-                android:textColor="@color/popbg"
-                android:textSize="@dimen/x20" />
+                android:textColor="@drawable/book_menubtn_txet_selector"
+                android:textSize="@dimen/x25" />
 
         </LinearLayout>
 
